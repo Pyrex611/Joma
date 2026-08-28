@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Custodian — Joma Consulting Records &amp; File Governance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F1712; --ink-soft:#57685F; --ink-faint:#89988F; --line:#DEE7E1;
+    --bg:#F3F7F4; --panel:#FFFFFF; --sidebar:#081712; --sidebar-panel:#0F241B;
+    --sidebar-soft:#93A99C; --sidebar-line:#1B362A;
+    --green:#1E8A4C; --green-deep:#166B3B; --green-soft:#E4F5EA;
+    --blue:#2662C9; --blue-soft:#E9F0FC;
+    --amber:#B7791F; --amber-soft:#FBF1DC;
+    --red:#C23B32; --red-soft:#FBEAE8;
+    --radius:12px;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;}
+  .mono{font-family:'Space Mono',monospace;}
+  .display{font-family:'Space Grotesk',sans-serif;}
+  button{font-family:inherit;cursor:pointer;}
+  ::selection{background:var(--green-soft);}
+  :focus-visible{outline:2px solid var(--green-deep);outline-offset:2px;}
+
+  /* ===== Top bar ===== */
+  #topbar{height:62px;background:var(--panel);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 22px;position:sticky;top:0;z-index:40;}
+  .tb-left{display:flex;align-items:center;gap:20px;}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;}
+  .logo .sq{width:26px;height:26px;border-radius:50%;background:conic-gradient(from 210deg, var(--sidebar) 0deg 190deg, var(--green) 190deg 360deg);position:relative;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .logo .sq::after{content:"C";color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12px;}
+  .logo .divider{width:1px;height:22px;background:var(--line);}
+  .logo .org{display:flex;align-items:center;gap:8px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14.5px;color:var(--ink);}
+  .logo .org .badge{width:20px;height:20px;border-radius:6px;background:var(--green-soft);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:var(--green-deep);font-family:'Inter',sans-serif;}
+  .env-tag{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--green-deep);background:var(--green-soft);padding:3px 9px;border-radius:100px;font-weight:700;}
+  .tb-right{display:flex;align-items:center;gap:16px;}
+  .role-select{border:1px solid var(--line);background:var(--panel);border-radius:100px;padding:8px 14px;font-size:13px;color:var(--ink);font-weight:500;}
+  .bell{position:relative;width:34px;height:34px;border-radius:100px;border:1px solid var(--line);background:var(--panel);display:flex;align-items:center;justify-content:center;font-size:15px;}
+  .bell .badge{position:absolute;top:-5px;right:-5px;background:var(--red);color:#fff;font-size:10px;font-weight:700;min-width:16px;height:16px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 4px;}
+  .user-chip{display:flex;align-items:center;gap:9px;padding-left:14px;border-left:1px solid var(--line);}
+  .avatar{width:30px;height:30px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;}
+  .user-chip .u-name{font-size:13px;font-weight:600;line-height:1.2;}
+  .user-chip .u-role{font-size:11px;color:var(--ink-soft);}
+
+  /* ===== Tab bar ===== */
+  #tabbar{display:flex;gap:2px;padding:0 22px;background:var(--panel);border-bottom:1px solid var(--line);overflow-x:auto;}
+  #tabbar button{border:0;background:transparent;padding:14px 16px;font-size:13.5px;font-weight:500;color:var(--ink-soft);border-bottom:2px solid transparent;display:flex;align-items:center;gap:8px;white-space:nowrap;}
+  #tabbar button.active{color:var(--ink);border-bottom-color:var(--green);}
+  #tabbar .count{background:var(--bg);border-radius:100px;padding:1px 7px;font-size:11px;font-weight:600;}
+  #tabbar button.active .count{background:var(--green-soft);color:var(--green-deep);}
+
+  /* ===== Layout ===== */
+  #body-layout{display:flex;min-height:calc(100vh - 108px);}
+  #sidebar{width:260px;flex-shrink:0;background:var(--sidebar);padding:20px 14px;}
+  #sidebar .grp-label{color:var(--sidebar-soft);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding:10px 10px 8px;}
+  .dept-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:100px;margin-bottom:2px;color:#D7E5DC;font-size:13.3px;cursor:pointer;transition:background .15s;}
+  .dept-item:hover{background:var(--sidebar-panel);}
+  .dept-item.active{background:var(--green);color:#fff;font-weight:600;}
+  .dept-item.active .dot{background:#fff;}
+  .dept-item.locked{color:#4E6459;cursor:not-allowed;}
+  .dept-item.locked:hover{background:transparent;}
+  .dept-item .dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;}
+  .dept-item.locked .dot{display:none;}
+  .dept-item .lock{margin-left:auto;font-size:11px;opacity:.7;}
+  .dept-item .home-tag{margin-left:auto;font-size:9.5px;background:rgba(255,255,255,.14);padding:2px 6px;border-radius:100px;}
+  #sidebar .foot-note{margin:18px 10px 4px;padding-top:16px;border-top:1px solid var(--sidebar-line);font-size:11px;color:var(--sidebar-soft);line-height:1.6;}
+
+  #main{flex:1;padding:26px 30px;min-width:0;}
+  .page-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px;flex-wrap:wrap;gap:14px;}
+  .page-head h1{font-size:20px;margin:0 0 4px;font-family:'Space Grotesk',sans-serif;}
+  .page-head .sub{font-size:13px;color:var(--ink-soft);}
+  .btn{border:0;border-radius:100px;padding:9px 16px;font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:7px;}
+  .btn-green{background:var(--sidebar);color:#fff;}
+  .btn-green:hover{background:#000;}
+  .btn-ghost{background:var(--panel);border:1px solid var(--line);color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--green);}
+  .btn-sm{padding:6px 13px;font-size:12.5px;}
+
+  /* file table */
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
+  table{width:100%;border-collapse:collapse;}
+  thead th{text-align:left;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);padding:12px 18px;border-bottom:1px solid var(--line);background:#FAFCFA;}
+  tbody td{padding:14px 18px;border-bottom:1px solid var(--line);font-size:13.5px;vertical-align:middle;}
+  tbody tr:last-child td{border-bottom:0;}
+  tbody tr:hover{background:#FAFCFA;}
+  .file-name{display:flex;align-items:center;gap:11px;}
+  .file-ic{width:32px;height:32px;border-radius:10px;background:var(--green-soft);color:var(--green-deep);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+  .file-name .n{font-weight:600;}
+  .file-name .tag{font-size:11.5px;color:var(--ink-soft);margin-top:1px;}
+  .chip{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:4px 9px;border-radius:100px;white-space:nowrap;}
+  .chip-owner{background:var(--green-soft);color:var(--green-deep);}
+  .chip-granted{background:var(--blue-soft);color:var(--blue);border:1px dashed var(--blue);}
+  .chip-transferred{background:var(--amber-soft);color:var(--amber);}
+  .chip-sensitive{background:var(--red-soft);color:var(--red);}
+  .row-actions{display:flex;gap:6px;justify-content:flex-end;}
+  .icon-btn{width:30px;height:30px;border-radius:100px;border:1px solid var(--line);background:var(--panel);display:flex;align-items:center;justify-content:center;font-size:13px;}
+  .icon-btn:hover{background:var(--bg);border-color:var(--green);}
+  .empty-state{padding:70px 30px;text-align:center;color:var(--ink-soft);}
+  .empty-state .big{font-size:34px;margin-bottom:14px;}
+  .empty-state h3{color:var(--ink);margin:0 0 8px;font-size:16px;font-family:'Space Grotesk',sans-serif;}
+  .empty-state p{max-width:420px;margin:0 auto;font-size:13.5px;line-height:1.6;}
+
+  /* drawer */
+  #overlay{position:fixed;inset:0;background:rgba(8,23,18,.45);display:none;z-index:60;}
+  #overlay.show{display:block;}
+  #drawer{position:fixed;top:0;right:-460px;width:440px;height:100%;background:var(--panel);z-index:61;box-shadow:-8px 0 30px rgba(0,0,0,.15);transition:right .3s ease;display:flex;flex-direction:column;}
+  #drawer.show{right:0;}
+  .drawer-head{padding:22px 22px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-start;}
+  .drawer-head h2{font-size:16px;margin:0 0 4px;}
+  .drawer-head .meta{font-size:12px;color:var(--ink-soft);}
+  .drawer-close{border:0;background:var(--bg);width:28px;height:28px;border-radius:100px;font-size:14px;}
+  .drawer-body{padding:20px 22px;overflow-y:auto;flex:1;}
+  .d-section{margin-bottom:26px;}
+  .d-section h4{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 12px;}
+  .reason-box{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:13px;line-height:1.6;}
+  .grant-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px;}
+  .grant-row:last-child{border-bottom:0;}
+  .grant-row .g-dept{font-weight:600;}
+  .grant-row .g-meta{font-size:11.5px;color:var(--ink-soft);}
+  .field{margin-bottom:14px;}
+  .field label{display:block;font-size:12.5px;font-weight:600;margin-bottom:6px;}
+  .field select,.field input,.field textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:9px 11px;font-size:13px;font-family:inherit;background:#fff;}
+  .field select:focus,.field input:focus,.field textarea:focus{outline:none;border-color:var(--green);}
+  .level-options{display:flex;gap:8px;}
+  .level-opt{flex:1;border:1px solid var(--line);border-radius:100px;padding:8px 6px;text-align:center;font-size:11.5px;font-weight:600;cursor:pointer;color:var(--ink-soft);}
+  .level-opt.sel{border-color:var(--green);background:var(--green-soft);color:var(--green-deep);}
+  .drawer-foot{padding:16px 22px;border-top:1px solid var(--line);display:flex;gap:10px;}
+  .link-btn{background:none;border:0;color:var(--red);font-size:12px;font-weight:600;padding:0;}
+
+  /* requests tab */
+  .req-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:12px;}
+  .req-left .f{font-weight:600;font-size:13.8px;margin-bottom:4px;}
+  .req-left .p{font-size:12.5px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;}
+  .badge-pill{font-size:11px;font-weight:700;padding:4px 10px;border-radius:100px;}
+  .badge-pending{background:var(--amber-soft);color:var(--amber);}
+  .badge-approved{background:var(--green-soft);color:var(--green-deep);}
+  .badge-declined{background:var(--red-soft);color:var(--red);}
+
+  /* activity log */
+  .log-row{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid var(--line);}
+  .log-row:last-child{border-bottom:0;}
+  .log-dot{width:8px;height:8px;border-radius:50%;background:var(--green);margin-top:5px;flex-shrink:0;}
+  .log-text{font-size:13.3px;}
+  .log-text b{font-weight:600;}
+  .log-time{font-size:11.5px;color:var(--ink-soft);margin-top:2px;}
+
+  /* admin */
+  .admin-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:20px;align-items:start;}
+  @media(max-width:980px){.admin-grid{grid-template-columns:1fr;}}
+  .matrix-table td,.matrix-table th{font-size:12.5px;}
+  .role-tag{font-size:11px;font-weight:700;padding:3px 9px;border-radius:100px;background:var(--green-soft);color:var(--green-deep);}
+  .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px;}
+  @media(max-width:900px){.kpi-row{grid-template-columns:repeat(2,1fr);}}
+  .kpi{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 18px;}
+  .kpi .lbl{font-size:11px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;}
+  .kpi .val{font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:700;}
+
+  /* toast */
+  #toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--sidebar);color:#fff;padding:13px 20px;border-radius:100px;font-size:13.5px;opacity:0;transition:all .25s;z-index:80;display:flex;align-items:center;gap:10px;}
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  @media(max-width:900px){
+    #body-layout{flex-direction:column;}
+    #sidebar{width:100%;display:flex;overflow-x:auto;gap:4px;padding:14px 14px;}
+    #sidebar .grp-label{display:none;}
+    .dept-item{white-space:nowrap;}
+    #sidebar .foot-note{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div id="topbar">
+  <div class="tb-left">
+    <div class="logo"><span class="sq"></span> Custodian</div>
+    <div class="logo divider"></div>
+    <div class="logo org"><span class="badge">J</span> Joma Consulting Services Ltd</div>
+    <span class="env-tag">Internal · Staff Only</span>
+  </div>
+  <div class="tb-right">
+    <select class="role-select" id="roleSelect">
+      <option value="staff">Viewing as: Staff</option>
+      <option value="head" selected>Viewing as: Department Head</option>
+      <option value="partner">Viewing as: Director (firm-wide)</option>
+      <option value="eqcr">Viewing as: Compliance Review</option>
+      <option value="admin">Viewing as: IT Admin</option>
+    </select>
+    <div class="bell">🔔<span class="badge" id="bellBadge">0</span></div>
+    <div class="user-chip">
+      <div class="avatar" id="userAvatar">TA</div>
+      <div><div class="u-name" id="userName">Tunde Alabi</div><div class="u-role" id="userDeptLabel">Corporate & Business Tax</div></div>
+    </div>
+  </div>
+</div>
+
+<div id="tabbar">
+  <button data-tab="files" class="active">📁 Files</button>
+  <button data-tab="requests">🔄 Transfer Requests <span class="count" id="reqCount">0</span></button>
+  <button data-tab="log">🕒 Activity Log</button>
+  <button data-tab="admin" id="adminTabBtn" style="display:none;">⚙️ Admin</button>
+</div>
+
+<div id="body-layout">
+  <div id="sidebar"></div>
+  <div id="main"></div>
+</div>
+
+<div id="overlay" onclick="closeDrawer()"></div>
+<div id="drawer"></div>
+<div id="toast"></div>
+
+<script>
+/* ============ DATA (Joma Consulting only — single tenant) ============ */
+const ORG = {
+  label: "Joma Consulting Services Ltd", short:"Joma", accent:"#1E8A4C",
+  user:{name:"Tunde Alabi", initials:"TA", homeDept:"corp"},
+  departments:[
+    {id:"indiv", name:"Individual Tax Services"},
+    {id:"corp", name:"Corporate & Business Tax"},
+    {id:"intl", name:"International Tax"},
+    {id:"indirect", name:"Indirect Tax (VAT/Sales Tax)"},
+    {id:"controversy", name:"Tax Controversy & Resolution"},
+    {id:"transferpricing", name:"Transfer Pricing"},
+    {id:"bookkeeping", name:"Bookkeeping & Accounting"},
+    {id:"compliance", name:"Compliance & Quality Control"},
+    {id:"it", name:"Information Technology"},
+    {id:"clientrel", name:"Client Relations & Marketing"},
+    {id:"adminhr", name:"Administration & HR"}
+  ],
+  files:[
+    {id:"j1", name:"Coral Foods Ltd — Corporate Tax Return FY2025", dept:"corp", tag:"Client: Coral Foods · Filing", modified:"1 day ago", sensitive:false,
+      grants:[{toDept:"bookkeeping", level:"view", expires:null, by:"Tunde Alabi"}], transferredFrom:null},
+    {id:"j2", name:"Coral Foods Ltd — Transfer Pricing Study", dept:"transferpricing", tag:"Client: Coral Foods · Advisory", modified:"3 days ago", sensitive:false, grants:[], transferredFrom:null},
+    {id:"j3", name:"Lagos Textiles — VAT Audit Response", dept:"indirect", tag:"Client: Lagos Textiles · FIRS Query", modified:"2 days ago", sensitive:false, grants:[], transferredFrom:null},
+    {id:"j4", name:"Okafor Family Trust — Personal Returns", dept:"indiv", tag:"Client: Okafor Family · Filing", modified:"5 days ago", sensitive:false, grants:[], transferredFrom:null},
+    {id:"j5", name:"Meridian Freight — Tax Controversy Case File", dept:"controversy", tag:"Restricted · Tribunal Matter", modified:"1 day ago", sensitive:true, grants:[], transferredFrom:null},
+    {id:"j6", name:"General Ledger — FY2025 Close", dept:"bookkeeping", tag:"Internal · Accounting", modified:"1 week ago", sensitive:false,
+      grants:[{toDept:"corp", level:"view", expires:"2026-10-15", by:"Funke Adeyemi (Bookkeeping Head)"}], transferredFrom:null},
+    {id:"j7", name:"Client Data Handling Policy", dept:"compliance", tag:"Internal · Policy", modified:"2 weeks ago", sensitive:false, grants:[], transferredFrom:null}
+  ]
+};
+
+const PERM_LEVELS = [
+  {id:"view", label:"View"},
+  {id:"comment", label:"Comment"},
+  {id:"edit", label:"Edit"},
+  {id:"manage", label:"Manage"}
+];
+
+let pendingRequests = [
+  {id:"r1", fileId:"j2", fromDept:"transferpricing", toDept:"corp", requestedBy:"Tunde Alabi",
+   reason:"Advisory phase complete — Corporate & Business Tax will handle the filing implications.", status:"pending"}
+];
+
+let activityLog = [
+  {actor:"Tunde Alabi", action:"granted Bookkeeping → View access", detail:"Coral Foods Ltd — Corporate Tax Return FY2025", time:"1 day ago"},
+  {actor:"System", action:"file uploaded", detail:"Meridian Freight — Tax Controversy Case File", time:"1 day ago"},
+  {actor:"Funke Adeyemi (Bookkeeping Head)", action:"granted Corporate & Business Tax → View access", detail:"General Ledger — FY2025 Close", time:"3 days ago"},
+  {actor:"System", action:"Compliance review completed", detail:"Client Data Handling Policy", time:"2 weeks ago"}
+];
+
+/* ============ STATE ============ */
+const state = { role:"head", activeDept:"corp", activeTab:"files" };
+
+/* ============ HELPERS ============ */
+const getDeptName = (deptId) => ORG.departments.find(d=>d.id===deptId)?.name || deptId;
+const getFile = (id) => ORG.files.find(f=>f.id===id);
+const isHomeDept = (deptId) => ORG.user.homeDept === deptId;
+
+function grantFor(file, deptId){
+  return file.grants.find(g => g.toDept === deptId && (!g.expires || new Date(g.expires) >= new Date("2026-08-27")));
+}
+function visibleFilesForDept(deptId){
+  if(deptId === ORG.user.homeDept){ return ORG.files.filter(f => f.dept === deptId); }
+  return ORG.files.filter(f => f.dept === deptId && grantFor(f, ORG.user.homeDept));
+}
+function deptAccessible(deptId){
+  if(state.role==="partner" || state.role==="eqcr") return true;
+  if(state.role==="admin") return false;
+  if(isHomeDept(deptId)) return true;
+  return ORG.files.some(f => f.dept===deptId && grantFor(f, ORG.user.homeDept));
+}
+function canManage(file){ return state.role==="head" && file.dept===ORG.user.homeDept; }
+function canEdit(file){
+  if(state.role==="partner" || state.role==="admin" || state.role==="eqcr") return false;
+  if(file.dept===ORG.user.homeDept) return true;
+  const g = grantFor(file, ORG.user.homeDept);
+  return g && (g.level==="edit" || g.level==="manage");
+}
+function accessReason(file){
+  if(state.role==="partner") return {type:"partner", text:"Visible to you as Director — firm-wide read access for oversight."};
+  if(state.role==="eqcr") return {type:"partner", text:"Visible to you as Compliance Review — every view is logged for the audit trail."};
+  if(file.dept===ORG.user.homeDept){
+    if(file.transferredFrom) return {type:"transferred", text:`Owned by your department — transferred from ${getDeptName(file.transferredFrom)}.`};
+    return {type:"owner", text:"Your department owns this file."};
+  }
+  const g = grantFor(file, ORG.user.homeDept);
+  if(g) return {type:"granted", text:`Shared by ${getDeptName(file.dept)} — ${g.level} access${g.expires ? ", expires "+g.expires : ", no expiry"}.`};
+  return {type:"none", text:"No access."};
+}
+function toast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(()=>t.classList.remove("show"), 2600);
+}
+
+/* ============ RENDER: TOPBAR ============ */
+function renderUserChip(){
+  document.getElementById("userAvatar").textContent = ORG.user.initials;
+  document.getElementById("userName").textContent = ORG.user.name;
+  document.getElementById("userDeptLabel").textContent = getDeptName(ORG.user.homeDept);
+}
+
+/* ============ RENDER: SIDEBAR ============ */
+function renderSidebar(){
+  const el = document.getElementById("sidebar");
+  if(state.role==="admin"){
+    el.innerHTML = `<div class="grp-label">Departments (structure only)</div>` +
+      ORG.departments.map(d=>`<div class="dept-item locked"><span class="dot"></span>${d.name}</div>`).join("");
+    return;
+  }
+  el.innerHTML = `<div class="grp-label">Joma Departments</div>` + ORG.departments.map(d=>{
+    const accessible = deptAccessible(d.id);
+    const active = state.activeDept === d.id;
+    const home = isHomeDept(d.id);
+    return `<div class="dept-item ${active?'active':''} ${accessible?'':'locked'}" onclick="${accessible? `selectDept('${d.id}')` : `lockedClick('${d.name}')`}">
+      <span class="dot"></span><span>${d.name}</span>
+      ${home?'<span class="home-tag">HOME</span>':(accessible?'':'<span class="lock">🔒</span>')}
+    </div>`;
+  }).join("") + `<div class="foot-note">Custodian keeps a permanent, timestamped record of every grant, transfer, and cross-department view for Joma Consulting.</div>`;
+}
+function selectDept(id){ state.activeDept = id; state.activeTab="files"; renderAll(); }
+function lockedClick(name){ toast(`No access — ${name} hasn't shared any files with you.`); }
+
+/* ============ RENDER: TABS ============ */
+function renderTabbar(){
+  document.querySelectorAll("#tabbar button[data-tab]").forEach(b=>{
+    b.classList.toggle("active", b.dataset.tab===state.activeTab);
+  });
+  document.getElementById("adminTabBtn").style.display = state.role==="admin" ? "flex" : "none";
+  document.getElementById("reqCount").textContent = pendingRequests.filter(r=>r.status==="pending").length;
+  document.getElementById("bellBadge").textContent = pendingRequests.filter(r=>r.status==="pending").length;
+}
+
+/* ============ RENDER: MAIN ============ */
+function renderMain(){
+  const el = document.getElementById("main");
+  if(state.role==="admin" && state.activeTab==="files"){
+    el.innerHTML = `<div class="empty-state">
+      <div class="big">🛡️</div>
+      <h3>IT Admins don't get file content access by default</h3>
+      <p>Separation of duties: the Admin role manages users, departments, and system settings — not the files themselves. Switch to the <b>Admin</b> tab to manage structure, or the <b>Activity Log</b> to monitor access firm-wide.</p>
+    </div>`;
+    return;
+  }
+  if(state.activeTab==="files") return renderFiles(el);
+  if(state.activeTab==="requests") return renderRequests(el);
+  if(state.activeTab==="log") return renderLog(el);
+  if(state.activeTab==="admin") return renderAdmin(el);
+}
+
+function renderFiles(el){
+  const deptName = getDeptName(state.activeDept);
+  const rows = (state.role==="partner" || state.role==="eqcr")
+    ? ORG.files.filter(f=>f.dept===state.activeDept)
+    : visibleFilesForDept(state.activeDept);
+
+  el.innerHTML = `
+    <div class="page-head">
+      <div><h1>${deptName}</h1><div class="sub">${rows.length} file${rows.length!==1?'s':''} visible to you in this department</div></div>
+      <button class="btn btn-ghost" onclick="toast('In production this uploads to the department\\'s storage bucket.')">＋ Upload File</button>
+    </div>
+    <div class="card">
+      <table>
+        <thead><tr><th>Name</th><th>Access</th><th>Modified</th><th style="text-align:right;">Actions</th></tr></thead>
+        <tbody>
+          ${rows.length ? rows.map(f=>renderFileRow(f)).join("") : `<tr><td colspan="4"><div class="empty-state"><div class="big">📭</div><h3>Nothing shared here yet</h3><p>No files in this department are visible to you.</p></div></td></tr>`}
+        </tbody>
+      </table>
+    </div>`;
+}
+
+function renderFileRow(f){
+  const reason = accessReason(f);
+  const chip = reason.type==="owner" ? `<span class="chip chip-owner">Owner</span>`
+    : reason.type==="transferred" ? `<span class="chip chip-transferred">Transferred in</span>`
+    : reason.type==="granted" ? `<span class="chip chip-granted">Shared</span>`
+    : reason.type==="partner" ? `<span class="chip chip-owner">Firm-wide</span>` : "";
+  const sens = f.sensitive ? `<span class="chip chip-sensitive">Restricted</span>` : "";
+  return `<tr>
+    <td>
+      <div class="file-name">
+        <div class="file-ic">📄</div>
+        <div><div class="n">${f.name}</div><div class="tag">${f.tag}</div></div>
+      </div>
+    </td>
+    <td>${chip} ${sens}</td>
+    <td class="mono" style="color:var(--ink-soft);font-size:12.5px;">${f.modified}</td>
+    <td>
+      <div class="row-actions">
+        <button class="icon-btn" title="Open details" onclick="openDrawer('${f.id}')">👁</button>
+      </div>
+    </td>
+  </tr>`;
+}
+
+function renderRequests(el){
+  const list = pendingRequests;
+  el.innerHTML = `
+    <div class="page-head">
+      <div><h1>Transfer Requests</h1><div class="sub">Department-to-department ownership handoffs, shown here for any department for this prototype — in production, scoped to the receiving Head.</div></div>
+    </div>
+    ${list.length ? list.map(r=>`
+      <div class="req-card">
+        <div class="req-left">
+          <div class="f">${getFile(r.fileId)?.name || r.fileId}</div>
+          <div class="p"><span class="mono">${getDeptName(r.fromDept)}</span> → <span class="mono">${getDeptName(r.toDept)}</span> · requested by ${r.requestedBy}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span class="badge-pill badge-${r.status}">${r.status}</span>
+          ${r.status==="pending" ? `
+            <button class="btn btn-ghost btn-sm" onclick="decideRequest('${r.id}','declined')">Decline</button>
+            <button class="btn btn-green btn-sm" onclick="decideRequest('${r.id}','approved')">Approve</button>
+          ` : ``}
+        </div>
+      </div>
+    `).join("") : `<div class="card"><div class="empty-state"><div class="big">✅</div><h3>No pending transfers</h3><p>Requests to move file ownership between departments will show up here.</p></div></div>`}
+  `;
+}
+
+function decideRequest(id, decision){
+  const r = pendingRequests.find(x=>x.id===id);
+  r.status = decision;
+  if(decision==="approved"){
+    const f = getFile(r.fileId);
+    f.transferredFrom = r.fromDept;
+    f.dept = r.toDept;
+    f.grants = [];
+  }
+  activityLog.unshift({actor:ORG.user.name, action:`${decision} transfer`, detail:`${getFile(r.fileId)?.name} → ${getDeptName(r.toDept)}`, time:"just now"});
+  toast(decision==="approved" ? "Transfer approved — ownership updated." : "Transfer declined.");
+  renderAll();
+}
+
+function renderLog(el){
+  const list = activityLog;
+  el.innerHTML = `
+    <div class="page-head"><div><h1>Activity Log</h1><div class="sub">Immutable record of every grant, transfer, and cross-department view.</div></div></div>
+    <div class="card" style="padding:6px 20px;">
+      ${list.map(l=>`
+        <div class="log-row">
+          <div class="log-dot"></div>
+          <div><div class="log-text"><b>${l.actor}</b> ${l.action} — <span class="mono">${l.detail}</span></div><div class="log-time">${l.time}</div></div>
+        </div>
+      `).join("")}
+    </div>`;
+}
+
+function renderAdmin(el){
+  const rows = [
+    ["Staff","Own department","View / edit files per folder-level permission"],
+    ["Department Head","Own department","Full control + grant/revoke access + approve transfers"],
+    ["Director","Whole firm","Read-only oversight across every department + full audit log"],
+    ["Compliance Review","Whole firm","Read-only review access, every view logged"],
+    ["IT Admin","System","User & department management — no file content access"]
+  ];
+  el.innerHTML = `
+    <div class="page-head"><div><h1>Admin Console</h1><div class="sub">${ORG.label} — roles, departments, and enforcement model.</div></div></div>
+    <div class="kpi-row">
+      <div class="kpi"><div class="lbl">Departments</div><div class="val">${ORG.departments.length}</div></div>
+      <div class="kpi"><div class="lbl">Files Tracked</div><div class="val">${ORG.files.length}</div></div>
+      <div class="kpi"><div class="lbl">Active Grants</div><div class="val">${ORG.files.reduce((n,f)=>n+f.grants.length,0)}</div></div>
+      <div class="kpi"><div class="lbl">Restricted Files</div><div class="val">${ORG.files.filter(f=>f.sensitive).length}</div></div>
+    </div>
+    <div class="admin-grid">
+      <div class="card" style="padding:20px;">
+        <h4 style="margin:0 0 14px;font-size:13px;">Role → Access Matrix</h4>
+        <table class="matrix-table">
+          <thead><tr><th>Role</th><th>Scope</th><th>Access</th></tr></thead>
+          <tbody>
+            ${rows.map(r=>`<tr><td><span class="role-tag">${r[0]}</span></td><td>${r[1]}</td><td style="color:var(--ink-soft);">${r[2]}</td></tr>`).join("")}
+          </tbody>
+        </table>
+      </div>
+      <div class="card" style="padding:20px;">
+        <h4 style="margin:0 0 14px;font-size:13px;">Departments (${ORG.departments.length})</h4>
+        ${ORG.departments.map(d=>`<div class="grant-row"><span class="g-dept">${d.name}</span><span class="g-meta mono">${d.id}</span></div>`).join("")}
+      </div>
+    </div>
+  `;
+}
+
+/* ============ DRAWER ============ */
+let drawerState = { fileId:null, level:"view", toDept:"" };
+
+function openDrawer(fileId){
+  const f = getFile(fileId);
+  drawerState = { fileId, level:"view", toDept: ORG.departments.find(d=>d.id!==f.dept)?.id || "" };
+  document.getElementById("overlay").classList.add("show");
+  document.getElementById("drawer").classList.add("show");
+  renderDrawer();
+}
+function closeDrawer(){
+  document.getElementById("overlay").classList.remove("show");
+  document.getElementById("drawer").classList.remove("show");
+}
+function setLevel(id){ drawerState.level = id; renderDrawer(); }
+function setTransferDept(v){ drawerState.toDept = v; }
+
+function renderDrawer(){
+  const f = getFile(drawerState.fileId);
+  if(!f) return;
+  const reason = accessReason(f);
+  const manage = canManage(f);
+  const drawer = document.getElementById("drawer");
+
+  let grantsHtml = f.grants.length ? f.grants.map(g=>`
+    <div class="grant-row">
+      <div><div class="g-dept">${getDeptName(g.toDept)}</div><div class="g-meta">${g.level} · ${g.expires?('expires '+g.expires):'no expiry'} · by ${g.by}</div></div>
+      ${manage ? `<button class="link-btn" onclick="revokeGrant('${f.id}','${g.toDept}')">Revoke</button>` : ``}
+    </div>`).join("") : `<div style="font-size:12.5px;color:var(--ink-soft);">Not shared with any other department.</div>`;
+
+  let shareForm = manage ? `
+    <div class="d-section">
+      <h4>Share With Another Department</h4>
+      <div class="field">
+        <label>Department</label>
+        <select id="shareDept">
+          ${ORG.departments.filter(d=>d.id!==f.dept).map(d=>`<option value="${d.id}">${d.name}</option>`).join("")}
+        </select>
+      </div>
+      <div class="field">
+        <label>Permission level</label>
+        <div class="level-options">
+          ${PERM_LEVELS.map(l=>`<div class="level-opt ${drawerState.level===l.id?'sel':''}" onclick="setLevel('${l.id}')">${l.label}</div>`).join("")}
+        </div>
+      </div>
+      <div class="field">
+        <label>Expiry (optional)</label>
+        <input type="date" id="shareExpiry">
+      </div>
+      <button class="btn btn-green" style="width:100%;justify-content:center;" onclick="submitGrant()">Grant Access</button>
+    </div>
+  ` : "";
+
+  let transferSection = manage ? `
+    <div class="d-section">
+      <h4>Transfer Ownership</h4>
+      <div class="field">
+        <label>Move this file to</label>
+        <select id="transferDept" onchange="setTransferDept(this.value)">
+          ${ORG.departments.filter(d=>d.id!==f.dept).map(d=>`<option value="${d.id}" ${drawerState.toDept===d.id?'selected':''}>${d.name}</option>`).join("")}
+        </select>
+      </div>
+      <div class="field"><label>Reason</label><textarea id="transferReason" rows="2" placeholder="e.g. Engagement complete, handing off for filing"></textarea></div>
+      <button class="btn btn-ghost" style="width:100%;justify-content:center;" onclick="submitTransfer()">Request Transfer</button>
+    </div>
+  ` : "";
+
+  drawer.innerHTML = `
+    <div class="drawer-head">
+      <div><h2>${f.name}</h2><div class="meta">${f.tag}</div></div>
+      <button class="drawer-close" onclick="closeDrawer()">✕</button>
+    </div>
+    <div class="drawer-body">
+      <div class="d-section">
+        <h4>Why you can see this</h4>
+        <div class="reason-box">${reason.text}</div>
+      </div>
+      <div class="d-section">
+        <h4>Current Access Grants</h4>
+        ${grantsHtml}
+      </div>
+      ${shareForm}
+      ${transferSection}
+      <div class="d-section">
+        <h4>File Activity</h4>
+        <div style="font-size:12.5px;color:var(--ink-soft);line-height:1.9;">
+          Modified ${f.modified}${f.transferredFrom ? `<br>Transferred from ${getDeptName(f.transferredFrom)}` : ``}
+        </div>
+      </div>
+    </div>
+    <div class="drawer-foot">
+      <button class="btn btn-ghost" style="flex:1;justify-content:center;" onclick="closeDrawer()">Close</button>
+      <button class="btn btn-green" style="flex:1;justify-content:center;${canEdit(f)?'':'opacity:.4;cursor:not-allowed;'}" ${canEdit(f)?'':'disabled'} onclick="toast('Opening in source application…')">Open File</button>
+    </div>
+  `;
+}
+
+function revokeGrant(fileId, deptId){
+  const f = getFile(fileId);
+  f.grants = f.grants.filter(g=>g.toDept!==deptId);
+  activityLog.unshift({actor:ORG.user.name, action:`revoked ${getDeptName(deptId)} access`, detail:f.name, time:"just now"});
+  toast(`Access revoked for ${getDeptName(deptId)}.`);
+  renderDrawer(); renderMain();
+}
+
+function submitGrant(){
+  const f = getFile(drawerState.fileId);
+  const deptSel = document.getElementById("shareDept").value;
+  const expiry = document.getElementById("shareExpiry").value || null;
+  f.grants = f.grants.filter(g=>g.toDept!==deptSel);
+  f.grants.push({toDept:deptSel, level:drawerState.level, expires:expiry, by:ORG.user.name});
+  activityLog.unshift({actor:ORG.user.name, action:`granted ${getDeptName(deptSel)} → ${drawerState.level} access`, detail:f.name, time:"just now"});
+  toast(`Shared with ${getDeptName(deptSel)}.`);
+  renderDrawer(); renderMain(); renderTabbar();
+}
+
+function submitTransfer(){
+  const f = getFile(drawerState.fileId);
+  const toDept = document.getElementById("transferDept").value;
+  const reason = document.getElementById("transferReason").value || "No reason provided.";
+  pendingRequests.unshift({id:"r"+Date.now(), fileId:f.id, fromDept:f.dept, toDept, requestedBy:ORG.user.name, reason, status:"pending"});
+  activityLog.unshift({actor:ORG.user.name, action:`requested transfer to ${getDeptName(toDept)}`, detail:f.name, time:"just now"});
+  toast(`Transfer request sent to ${getDeptName(toDept)} for approval.`);
+  closeDrawer(); renderAll();
+}
+
+/* ============ EVENTS ============ */
+document.getElementById("roleSelect").addEventListener("change", (e)=>{
+  state.role = e.target.value;
+  state.activeDept = ORG.user.homeDept;
+  state.activeTab = state.role==="admin" ? "admin" : "files";
+  renderAll();
+});
+document.querySelectorAll("#tabbar button[data-tab]").forEach(b=>{
+  b.addEventListener("click", ()=>{ state.activeTab = b.dataset.tab; renderAll(); });
+});
+
+/* ============ RENDER ALL ============ */
+function renderAll(){
+  renderUserChip();
+  renderSidebar();
+  renderTabbar();
+  renderMain();
+  document.getElementById("roleSelect").value = state.role;
+}
+renderAll();
+</script>
+</body>
+</html>
