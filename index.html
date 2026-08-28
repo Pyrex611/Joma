@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joma Consulting Services Ltd | Tax · Contracts · Growth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* ===== Joma token system — cool mint-white ground, navy ink, growth-green accent ===== */
+    --paper:#F6FAF7;         /* primary background — pale cool mint-white */
+    --paper-deep:#EAF5EE;    /* pastel mint band background */
+    --white:#FFFFFF;
+    --navy:#0E1B2E;          /* primary ink / headings — shared family with MJC, cooler cast */
+    --navy-1:#152840;
+    --green:#1E8A4C;         /* primary accent */
+    --green-deep:#166B3B;
+    --green-bright:#38B871;
+    --mint-pale:#DFF3E6;     /* pastel tint for badges/backgrounds */
+    --ink:#1B2A22;
+    --ink-soft:#57695F;
+    --ink-faint:#8CA096;
+    --line:#DCEAE0;          /* cool hairline */
+    --line-soft:#E9F3ED;
+    --shadow:0 24px 60px -32px rgba(14,27,46,.18);
+    --radius-lg:24px;
+    --radius-md:18px;
+    --radius-sm:12px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important;} }
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;position:relative;}
+  h1,h2,h3,.display{font-family:'Space Grotesk',sans-serif;}
+  .mono{font-family:'Space Mono',monospace;}
+  a{color:inherit;}
+  button{font-family:inherit;}
+  img{max-width:100%;display:block;}
+  :focus-visible{outline:2px solid var(--green-deep);outline-offset:3px;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;position:relative;z-index:2;}
+  @media(max-width:640px){.wrap{padding:0 20px;}}
+
+  .blob{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0;}
+  .blob-mint{background:radial-gradient(circle, rgba(30,138,76,0.16), transparent 70%);}
+
+  .dot-grid{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
+    background-image:radial-gradient(rgba(14,27,46,0.06) 1px, transparent 1px);background-size:26px 26px;
+    -webkit-mask-image:radial-gradient(ellipse 60% 40% at 50% 0%, black, transparent 70%);
+    mask-image:radial-gradient(ellipse 60% 40% at 50% 0%, black, transparent 70%);
+  }
+
+  .glass{background:rgba(255,255,255,.7);border:1px solid var(--line);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);}
+  .glass-green{border:1px solid rgba(30,138,76,.25);}
+
+  /* ===== Nav ===== */
+  .nav-wrap{position:sticky;top:18px;z-index:50;padding:0 20px;transition:top .25s ease;}
+  header{max-width:1120px;margin:0 auto;background:rgba(255,255,255,0.82);border:1px solid var(--line);border-radius:100px;backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);box-shadow:0 14px 34px -18px rgba(14,27,46,.18);}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 8px 0 22px;}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--navy);background:none;border:0;cursor:pointer;}
+  .brand .mark{width:32px;height:32px;border-radius:50%;background:conic-gradient(from 210deg, var(--navy) 0deg 190deg, var(--green) 190deg 360deg);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .brand .mark::after{content:"J";color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;}
+  .brand .name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15.5px;color:var(--navy);}
+  ul.nav-links{display:flex;gap:24px;list-style:none;margin:0;padding:0;}
+  ul.nav-links a{color:var(--ink-soft);text-decoration:none;font-size:13.5px;font-weight:600;white-space:nowrap;transition:color .2s;}
+  ul.nav-links a:hover{color:var(--green-deep);}
+  .nav-ctas{display:flex;align-items:center;gap:8px;}
+  .btn-nav-ghost{border:1.5px solid var(--navy);color:var(--navy);padding:9px 18px;border-radius:100px;text-decoration:none;font-size:12.5px;font-weight:700;white-space:nowrap;background:transparent;display:inline-flex;align-items:center;gap:7px;cursor:pointer;transition:all .2s;}
+  .btn-nav-ghost:hover{background:var(--navy);color:#fff;}
+  .btn-nav-ghost svg{width:13px;height:13px;}
+  .btn-nav-solid{background:var(--green);color:#fff;padding:10px 20px;border-radius:100px;text-decoration:none;font-size:12.5px;font-weight:700;white-space:nowrap;transition:background .2s;border:0;cursor:pointer;}
+  .btn-nav-solid:hover{background:var(--green-deep);}
+  .menu-toggle{display:none;background:none;border:0;font-size:19px;cursor:pointer;color:var(--navy);width:36px;height:36px;align-items:center;justify-content:center;border-radius:50%;flex-shrink:0;}
+  .menu-toggle:hover{background:var(--mint-pale);}
+  @media(max-width:900px){ul.nav-links{display:none;} .btn-nav-ghost span,.btn-nav-solid{display:none;} .menu-toggle{display:flex;}}
+  @media(max-width:900px){.btn-nav-ghost{padding:9px;}}
+
+  #mobileMenu{max-width:1080px;margin:10px auto 0;background:rgba(255,255,255,0.96);border:1px solid var(--line);border-radius:22px;backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);max-height:0;overflow:hidden;opacity:0;transition:max-height .3s ease, opacity .25s ease;}
+  #mobileMenu.open{max-height:420px;opacity:1;}
+  #mobileMenu .inner{padding:14px 22px 20px;display:flex;flex-direction:column;gap:2px;}
+  #mobileMenu a,#mobileMenu button.mlink{color:var(--navy);text-decoration:none;font-size:15px;font-weight:600;padding:12px 4px;border-bottom:1px solid var(--line-soft);background:none;border-left:0;border-right:0;border-top:0;text-align:left;cursor:pointer;font-family:inherit;}
+  #mobileMenu a:last-of-type{border-bottom:none;}
+  #mobileMenu .m-ctas{display:flex;gap:10px;margin-top:14px;}
+  #mobileMenu .m-ctas a,#mobileMenu .m-ctas button{border-bottom:none;padding:11px 0;text-align:center;flex:1;border-radius:100px;font-weight:700;}
+
+  /* ===== Hero ===== */
+  .hero{padding:64px 0 0;position:relative;overflow:hidden;}
+  .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;padding:54px 0 74px;}
+  @media(max-width:940px){.hero-grid{grid-template-columns:1fr;}}
+  .pill{display:inline-flex;align-items:center;gap:8px;border-radius:100px;padding:8px 18px;font-size:12.5px;font-weight:700;color:var(--green-deep);margin-bottom:26px;}
+  .pill .dot{width:6px;height:6px;border-radius:50%;background:var(--green);}
+  .hero h1{font-size:clamp(31px,4.3vw,52px);line-height:1.12;font-weight:700;margin:0 0 22px;color:var(--navy);letter-spacing:-.01em;}
+  .hero h1 .accent{color:var(--green-deep);}
+  .hero p.lead{font-size:16.5px;line-height:1.75;color:var(--ink-soft);max-width:480px;margin:0 0 32px;}
+  .actions{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn-primary{background:var(--green);color:#fff;padding:16px 28px;border-radius:100px;text-decoration:none;font-weight:700;font-size:14px;transition:background .2s;border:0;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;}
+  .btn-primary:hover{background:var(--green-deep);}
+  .btn-ghost{border:1.5px solid var(--navy);color:var(--navy);padding:16px 28px;border-radius:100px;text-decoration:none;font-size:14px;font-weight:700;background:transparent;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;justify-content:center;}
+  .btn-ghost:hover{background:var(--navy);color:#fff;}
+  .hero-micro{display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-faint);font-weight:600;margin-top:26px;}
+  .hero-micro span{display:flex;align-items:center;gap:8px;}
+  .hero-micro span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--green);}
+
+  /* Bracket card (progressive tax bracket viz) */
+  .bracket-card{background:var(--white);border-radius:var(--radius-md);padding:32px 30px 26px;box-shadow:var(--shadow);border:1px solid var(--line);position:relative;}
+  .bc-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;}
+  .bc-head .t{color:var(--navy);font-size:13px;font-weight:700;}
+  .bc-head .s{color:var(--green-deep);font-family:'Space Mono',monospace;font-size:10.5px;display:flex;align-items:center;gap:6px;font-weight:600;}
+  .bc-head .s::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--green);}
+  .ladder{display:flex;align-items:flex-end;gap:12px;height:190px;padding:0 4px;}
+  .ladder .bar-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;}
+  .ladder .bar{width:100%;border-radius:8px 8px 0 0;background:linear-gradient(180deg, var(--green-bright), var(--green));transform:scaleY(0);transform-origin:bottom;animation:grow .8s cubic-bezier(.2,.8,.2,1) forwards;}
+  .ladder .bar-col:nth-child(1) .bar{height:28%;animation-delay:.1s;}
+  .ladder .bar-col:nth-child(2) .bar{height:46%;animation-delay:.25s;}
+  .ladder .bar-col:nth-child(3) .bar{height:64%;animation-delay:.4s;}
+  .ladder .bar-col:nth-child(4) .bar{height:82%;animation-delay:.55s;}
+  .ladder .bar-col:nth-child(5) .bar{height:100%;animation-delay:.7s;}
+  @keyframes grow{to{transform:scaleY(1);}}
+  .ladder .pct{color:var(--ink-soft);font-family:'Space Mono',monospace;font-size:10px;margin-top:9px;font-weight:700;}
+  .ladder .band-lbl{color:var(--ink-faint);font-family:'Space Mono',monospace;font-size:9px;margin-top:2px;}
+  .bc-foot{display:flex;justify-content:space-between;align-items:center;margin-top:24px;padding-top:18px;border-top:1px solid var(--line-soft);}
+  .bc-foot .lbl{color:var(--ink-soft);font-size:11.5px;}
+  .bc-foot .val{color:var(--green-deep);font-family:'Space Mono',monospace;font-size:13px;font-weight:700;}
+
+  section{padding:96px 0;position:relative;}
+  .section-head{max-width:600px;margin:0 auto 50px;}
+  .kicker{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--green-deep);font-weight:700;margin-bottom:14px;}
+  .section-head h2{font-size:clamp(24px,2.9vw,36px);margin:0 0 14px;color:var(--navy);font-weight:700;letter-spacing:-.01em;}
+  .section-head p{color:var(--ink-soft);line-height:1.75;font-size:15px;}
+  .band-pale{background:var(--paper-deep);}
+
+  /* ===== Trust strip ===== */
+  .trust-strip{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .trust-item{padding:30px 20px;text-align:center;border-right:1px solid var(--line);}
+  .trust-item:last-child{border-right:none;}
+  .trust-item .num{font-family:'Space Grotesk',sans-serif;font-size:25px;color:var(--navy);font-weight:700;}
+  .trust-item .lbl{font-size:11.5px;color:var(--ink-soft);margin-top:8px;line-height:1.5;max-width:170px;margin-left:auto;margin-right:auto;}
+  @media(max-width:800px){.trust-strip{grid-template-columns:repeat(2,1fr);} .trust-item:nth-child(2){border-right:none;}}
+
+  /* ===== Pillars (bento) ===== */
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  @media(max-width:860px){.pillars{grid-template-columns:1fr;}}
+  .pillar{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-md);padding:34px 30px;transition:transform .25s, box-shadow .25s;}
+  .pillar:hover{transform:translateY(-4px);box-shadow:var(--shadow);}
+  .pillar .icon{width:48px;height:48px;border-radius:14px;background:var(--mint-pale);display:flex;align-items:center;justify-content:center;margin-bottom:22px;color:var(--green-deep);}
+  .pillar .icon svg{width:24px;height:24px;}
+  .pillar h3{font-size:18.5px;margin:0 0 10px;color:var(--navy);}
+  .pillar p{color:var(--ink-soft);font-size:14px;line-height:1.65;margin:0;}
+
+  /* ===== Departments ===== */
+  .dept-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:800px){.dept-grid{grid-template-columns:1fr;}}
+  .dept-group{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-md);padding:26px 24px;}
+  .dept-group h4{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--green-deep);margin:0 0 16px;font-weight:700;}
+  .dept-row{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid var(--line-soft);}
+  .dept-row:last-child{border-bottom:0;}
+  .dept-row .tag{width:26px;height:26px;border-radius:8px;background:var(--mint-pale);color:var(--green-deep);display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:10.5px;flex-shrink:0;font-weight:700;}
+  .dept-row .t{font-size:13.8px;color:var(--ink);}
+
+  /* ===== Flow ===== */
+  .flow{display:flex;align-items:center;gap:0;flex-wrap:wrap;}
+  .flow-step{flex:1;min-width:180px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius-md);padding:26px 24px;}
+  .flow-step h4{margin:0 0 8px;font-size:14.5px;color:var(--navy);}
+  .flow-step p{margin:0;font-size:13px;color:var(--ink-soft);line-height:1.55;}
+  .flow-arrow{color:var(--green-deep);font-size:18px;padding:0 12px;flex-shrink:0;}
+  @media(max-width:760px){.flow{flex-direction:column;align-items:stretch;} .flow-arrow{transform:rotate(90deg);align-self:center;padding:8px 0;}}
+
+  /* ===== Testimonial (full green-tinted bleed) ===== */
+  .quote-band{background:var(--navy);position:relative;overflow:hidden;padding:92px 0;}
+  .quote-band::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 20% 30%, rgba(30,138,76,0.14), transparent 55%);}
+  .band-inner{display:flex;gap:48px;align-items:center;justify-content:space-between;flex-wrap:wrap;position:relative;z-index:1;}
+  .band-inner blockquote{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:25px;color:#fff;max-width:600px;margin:0;line-height:1.5;letter-spacing:-.01em;}
+  .band-inner .attrib{margin-top:18px;font-size:13px;color:rgba(255,255,255,.55);font-weight:500;letter-spacing:.01em;}
+  .band-seal{width:112px;height:112px;border-radius:50%;background:conic-gradient(from 210deg, var(--navy) 0deg 190deg, var(--green) 190deg 360deg);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 44px rgba(30,138,76,.3);}
+  .band-seal span{color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;}
+
+  /* ===== FAQ ===== */
+  .faq-list{max-width:800px;margin:0 auto;}
+  details.faq{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-sm);margin-bottom:12px;overflow:hidden;}
+  details.faq summary{list-style:none;cursor:pointer;padding:22px 26px;display:flex;justify-content:space-between;align-items:center;gap:16px;font-weight:700;color:var(--navy);font-size:15px;}
+  details.faq summary::-webkit-details-marker{display:none;}
+  details.faq .chev{width:20px;height:20px;flex-shrink:0;border:1.5px solid var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--green-deep);font-size:12px;transition:transform .25s ease;}
+  details.faq[open] .chev{transform:rotate(45deg);}
+  details.faq .faq-body{padding:0 26px 24px;color:var(--ink-soft);font-size:14.5px;line-height:1.75;max-width:640px;}
+
+  /* ===== CTA ===== */
+  .cta-section{text-align:center;}
+  .cta-box{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-lg);padding:66px 40px;box-shadow:var(--shadow);position:relative;overflow:hidden;}
+  .cta-box h2{font-size:clamp(23px,3vw,34px);margin:0 0 14px;color:var(--navy);}
+  .cta-box p{color:var(--ink-soft);max-width:460px;margin:0 auto 30px;line-height:1.7;}
+
+  footer{padding:52px 0 30px;font-size:13px;color:rgba(255,255,255,.6);border-top:1px solid var(--line);position:relative;z-index:2;background:var(--navy);}
+  .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:20px;}
+  @media(max-width:700px){.foot-grid{grid-template-columns:1fr;gap:24px;}}
+  footer h5{color:#fff;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;margin:0 0 14px;}
+  footer .brand-line{font-family:'Space Grotesk',sans-serif;color:#fff;font-weight:700;font-size:17px;margin-bottom:10px;}
+  footer p{color:rgba(255,255,255,.55);}
+  footer ul{list-style:none;margin:0;padding:0;}
+  footer li{margin-bottom:9px;}
+  footer a{text-decoration:none;color:rgba(255,255,255,.6);}
+  footer a:hover{color:var(--green-bright);}
+  .foot-bottom{padding-top:0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:11.5px;color:rgba(255,255,255,.4);}
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* ============================================================
+     CLIENT PORTAL ("Dashboard")
+  ============================================================ */
+  #portalGate,#portal{display:none;}
+  body.portal-open #site{display:none;}
+  body.portal-gate-open #portalGate{display:flex;}
+  body.portal-open #portal{display:block;}
+
+  #portalGate{position:fixed;inset:0;z-index:200;background:rgba(14,27,46,.65);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:24px;overflow-y:auto;}
+  .gate-card{width:100%;max-width:420px;border-radius:var(--radius-lg);padding:42px 38px;position:relative;background:var(--white);border:1px solid var(--line);box-shadow:var(--shadow);}
+  .gate-close{position:absolute;top:18px;right:18px;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:var(--paper);color:var(--navy);display:flex;align-items:center;justify-content:center;cursor:pointer;}
+  .gate-brand{display:flex;align-items:center;gap:10px;margin-bottom:28px;}
+  .gate-tabs{display:flex;gap:4px;background:var(--paper);border:1px solid var(--line);border-radius:100px;padding:4px;margin-bottom:26px;}
+  .gate-tabs button{flex:1;border:0;background:transparent;color:var(--ink-soft);padding:9px 0;border-radius:100px;font-size:13px;font-weight:700;cursor:pointer;}
+  .gate-tabs button.active{background:var(--green);color:#fff;}
+  .gate-card h2{color:var(--navy);font-size:22px;margin:0 0 8px;font-family:'Space Grotesk',sans-serif;}
+  .gate-card .sub{color:var(--ink-soft);font-size:13.5px;margin-bottom:24px;line-height:1.6;}
+  .field{margin-bottom:16px;text-align:left;}
+  .field label{display:block;font-size:12px;font-weight:700;color:var(--ink-soft);margin-bottom:7px;letter-spacing:.02em;}
+  .field input,.field select,.field textarea{width:100%;background:var(--paper);border:1px solid var(--line);color:var(--navy);border-radius:10px;padding:11px 13px;font-size:13.5px;font-family:inherit;}
+  .field input::placeholder,.field textarea::placeholder{color:var(--ink-faint);}
+  .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--green);outline:none;}
+  .gate-foot{text-align:center;font-size:12.5px;color:var(--ink-soft);margin-top:18px;}
+  .gate-foot button{background:none;border:0;color:var(--green-deep);cursor:pointer;font-size:12.5px;padding:0;font-family:inherit;font-weight:700;}
+
+  #portal{background:#0B1522;min-height:100vh;}
+  .p-topbar{height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;border-bottom:1px solid rgba(255,255,255,.09);background:rgba(11,21,34,.85);backdrop-filter:blur(16px);position:sticky;top:0;z-index:40;}
+  .p-topbar .p-brand{display:flex;align-items:center;gap:10px;background:none;border:0;color:#fff;cursor:pointer;}
+  .p-topbar .p-brand .name{font-family:'Space Grotesk',sans-serif;font-size:14.5px;font-weight:700;text-align:left;}
+  .p-topbar .p-brand .name small{display:block;font-size:9px;letter-spacing:.14em;color:var(--green-bright);text-transform:uppercase;margin-top:2px;font-family:'Inter',sans-serif;font-weight:600;}
+  .p-top-right{display:flex;align-items:center;gap:16px;}
+  .p-link-back{font-size:12.5px;color:#8FA098;text-decoration:none;display:flex;align-items:center;gap:6px;cursor:pointer;background:none;border:0;font-family:inherit;}
+  .p-link-back:hover{color:var(--green-bright);}
+  .p-user{display:flex;align-items:center;gap:10px;padding-left:16px;border-left:1px solid rgba(255,255,255,.09);}
+  .p-avatar{width:32px;height:32px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;}
+  .p-user .u-name{font-size:12.5px;font-weight:600;color:#fff;line-height:1.2;}
+  .p-user .u-sub{font-size:10.5px;color:#8FA098;}
+  .p-signout{background:none;border:1px solid rgba(255,255,255,.14);color:#8FA098;border-radius:100px;padding:7px 14px;font-size:11.5px;cursor:pointer;}
+  .p-signout:hover{border-color:var(--green);color:#fff;}
+
+  .p-shell{display:flex;align-items:flex-start;}
+  .p-sidebar{width:250px;flex-shrink:0;padding:26px 16px;position:sticky;top:68px;height:calc(100vh - 68px);border-right:1px solid rgba(255,255,255,.09);}
+  .p-sidebar .grp{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#5A6A62;padding:8px 12px 10px;}
+  .p-nav-item{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:100px;color:#8FA098;font-size:13.5px;cursor:pointer;margin-bottom:2px;transition:background .15s,color .15s;}
+  .p-nav-item svg{width:16px;height:16px;flex-shrink:0;opacity:.8;}
+  .p-nav-item:hover{background:rgba(255,255,255,.05);color:#fff;}
+  .p-nav-item.active{background:rgba(30,138,76,0.18);color:var(--green-bright);border:1px solid rgba(30,138,76,.35);}
+  .p-nav-item .cnt{margin-left:auto;background:rgba(255,255,255,.08);border-radius:100px;padding:1px 8px;font-size:10.5px;color:#8FA098;}
+  .p-nav-item.active .cnt{background:var(--green);color:#fff;}
+
+  .p-main{flex:1;min-width:0;padding:34px 36px 70px;}
+  @media(max-width:900px){
+    .p-shell{flex-direction:column;}
+    .p-sidebar{position:static;width:100%;height:auto;display:flex;overflow-x:auto;gap:4px;padding:14px 16px;border-right:0;border-bottom:1px solid rgba(255,255,255,.09);}
+    .p-sidebar .grp{display:none;}
+    .p-nav-item{white-space:nowrap;margin-bottom:0;}
+    .p-main{padding:26px 20px 60px;}
+  }
+
+  .p-page-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:26px;}
+  .p-page-head h1{font-size:23px;color:#fff;margin:0 0 6px;font-weight:700;}
+  .p-page-head .sub{color:#8FA098;font-size:13.5px;}
+
+  .p-glass{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.09);}
+  .p-glass-green{border:1px solid rgba(30,138,76,.3);}
+
+  .p-stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:30px;}
+  @media(max-width:900px){.p-stat-grid{grid-template-columns:repeat(2,1fr);}}
+  .p-stat-card{border-radius:16px;padding:20px 20px;}
+  .p-stat-card .lbl{font-size:11px;color:#8FA098;letter-spacing:.04em;text-transform:uppercase;margin-bottom:10px;}
+  .p-stat-card .val{font-family:'Space Grotesk',sans-serif;font-size:26px;color:#fff;font-weight:700;}
+  .p-stat-card .val small{font-family:'Inter',sans-serif;font-size:12px;color:var(--green-bright);font-weight:600;margin-left:6px;}
+
+  .p-grid-2{display:grid;grid-template-columns:1.4fr 1fr;gap:18px;align-items:start;}
+  @media(max-width:940px){.p-grid-2{grid-template-columns:1fr;}}
+  .p-card{border-radius:18px;padding:24px;}
+  .p-card h3{color:#fff;font-size:15px;margin:0 0 4px;}
+  .p-card .p-card-sub{color:#8FA098;font-size:12.5px;margin-bottom:18px;}
+
+  .p-activity-row{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.09);}
+  .p-activity-row:last-child{border-bottom:0;}
+  .p-activity-dot{width:7px;height:7px;border-radius:50%;background:var(--green-bright);margin-top:6px;flex-shrink:0;}
+  .p-activity-row .txt{font-size:13px;color:#D7E5DC;}
+  .p-activity-row .txt b{color:#fff;}
+  .p-activity-row .time{font-size:11px;color:#5A6A62;margin-top:2px;}
+
+  .p-consult-card{display:flex;flex-direction:column;gap:14px;}
+  .p-consult-date{display:flex;align-items:center;gap:14px;}
+  .p-consult-date .d{width:52px;height:52px;border-radius:14px;background:rgba(30,138,76,.16);border:1px solid rgba(30,138,76,.35);display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--green-bright);flex-shrink:0;}
+  .p-consult-date .d .day{font-family:'Space Grotesk',sans-serif;font-size:17px;line-height:1;font-weight:700;}
+  .p-consult-date .d .mon{font-size:9px;letter-spacing:.08em;text-transform:uppercase;margin-top:2px;}
+  .p-consult-date .info .t{color:#fff;font-size:13.5px;font-weight:600;}
+  .p-consult-date .info .s{color:#8FA098;font-size:12px;margin-top:2px;}
+
+  .p-form .field{margin-bottom:18px;}
+  .p-form .field label{color:#8FA098;}
+  .p-form .field input,.p-form .field select,.p-form .field textarea{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:#fff;}
+  .p-form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:600px){.p-form-row{grid-template-columns:1fr;}}
+  .p-level-options{display:flex;gap:8px;flex-wrap:wrap;}
+  .p-chip-opt{border:1px solid rgba(255,255,255,.14);border-radius:100px;padding:9px 16px;font-size:12.5px;color:#8FA098;cursor:pointer;}
+  .p-chip-opt.sel{border-color:var(--green);background:rgba(30,138,76,.16);color:var(--green-bright);}
+
+  .p-table{width:100%;border-collapse:collapse;}
+  .p-table th{text-align:left;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#5A6A62;padding:0 14px 12px;border-bottom:1px solid rgba(255,255,255,.09);font-weight:600;}
+  .p-table td{padding:14px;border-bottom:1px solid rgba(255,255,255,.09);font-size:13.3px;vertical-align:middle;}
+  .p-table tr:last-child td{border-bottom:0;}
+  .p-table .svc-name{color:#fff;font-weight:600;}
+  .p-table .svc-sub{color:#8FA098;font-size:11.5px;margin-top:2px;}
+  .p-chip{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;padding:5px 11px;border-radius:100px;white-space:nowrap;}
+  .p-chip::before{content:"";width:6px;height:6px;border-radius:50%;}
+  .p-chip.submitted{background:rgba(30,138,76,.18);color:var(--green-bright);}
+  .p-chip.submitted::before{background:var(--green-bright);}
+  .p-chip.scheduled{background:rgba(90,150,220,.16);color:#8FC0F2;}
+  .p-chip.scheduled::before{background:#8FC0F2;}
+  .p-chip.progress{background:rgba(234,179,8,.16);color:#F3CB55;}
+  .p-chip.progress::before{background:#F3CB55;}
+  .p-chip.done{background:rgba(34,178,95,.24);color:var(--green-bright);}
+  .p-chip.done::before{background:var(--green-bright);}
+
+  .p-dropzone{border:1.5px dashed rgba(255,255,255,.14);border-radius:18px;padding:44px 24px;text-align:center;margin-bottom:24px;transition:border-color .2s,background .2s;}
+  .p-dropzone.drag{border-color:var(--green);background:rgba(30,138,76,.07);}
+  .p-dropzone .ic{font-size:28px;margin-bottom:12px;}
+  .p-dropzone h4{color:#fff;margin:0 0 6px;font-size:14.5px;}
+  .p-dropzone p{color:#8FA098;font-size:12.5px;margin:0 0 16px;}
+
+  .p-doc-row{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.09);}
+  .p-doc-row:last-child{border-bottom:0;}
+  .p-doc-ic{width:38px;height:38px;border-radius:12px;background:rgba(30,138,76,.16);color:var(--green-bright);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+  .p-doc-row .n{color:#fff;font-size:13.5px;font-weight:600;}
+  .p-doc-row .m{color:#8FA098;font-size:11.5px;margin-top:2px;}
+  .p-doc-row .sp{flex:1;}
+  .p-icon-btn{width:32px;height:32px;border-radius:100px;border:1px solid rgba(255,255,255,.14);background:transparent;color:#8FA098;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px;}
+  .p-icon-btn:hover{border-color:var(--green);color:var(--green-bright);}
+
+  .p-toggle-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.09);}
+  .p-toggle-row:last-child{border-bottom:0;}
+  .p-toggle-row .t{color:#fff;font-size:13.5px;font-weight:600;}
+  .p-toggle-row .s{color:#8FA098;font-size:12px;margin-top:2px;}
+  .switch{position:relative;width:42px;height:24px;flex-shrink:0;}
+  .switch input{opacity:0;width:0;height:0;}
+  .switch .track{position:absolute;inset:0;background:rgba(255,255,255,.12);border-radius:100px;transition:.2s;cursor:pointer;}
+  .switch .track::after{content:"";position:absolute;width:18px;height:18px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s;}
+  .switch input:checked + .track{background:var(--green);}
+  .switch input:checked + .track::after{transform:translateX(18px);}
+
+  #p-toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#fff;color:var(--navy);padding:13px 22px;border-radius:100px;font-size:13.5px;font-weight:600;opacity:0;transition:all .25s;z-index:300;display:flex;align-items:center;gap:10px;box-shadow:0 20px 40px -10px rgba(0,0,0,.5);pointer-events:none;}
+  #p-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+
+<div class="dot-grid"></div>
+
+<!-- ============ MARKETING SITE ============ -->
+<div id="site">
+
+<div class="nav-wrap" id="navWrap">
+  <header>
+    <div class="nav">
+      <button class="brand" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <span class="mark"></span>
+        <span class="name">Joma Consulting</span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#process">How We Work</a></li>
+        <li><a href="#departments">Departments</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-ctas">
+        <button class="btn-nav-ghost" onclick="openGate()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg><span>Dashboard</span></button>
+        <a class="btn-nav-solid" href="#contact">Book a Consultation</a>
+      </div>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu" onclick="toggleMobileMenu()">☰</button>
+    </div>
+  </header>
+  <div id="mobileMenu">
+    <div class="inner">
+      <a href="#services" onclick="closeMobileMenu()">Services</a>
+      <a href="#process" onclick="closeMobileMenu()">How We Work</a>
+      <a href="#departments" onclick="closeMobileMenu()">Departments</a>
+      <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
+      <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+      <button class="mlink" onclick="closeMobileMenu();openGate()">Client Dashboard →</button>
+      <div class="m-ctas">
+        <a class="btn-nav-solid" href="#contact" onclick="closeMobileMenu()">Book a Consultation</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="hero" id="top">
+  <div class="blob blob-mint" style="width:560px;height:560px;top:-140px;right:-180px;"></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="pill glass"><span class="dot"></span> Tax Consulting &amp; Contract Solutions</div>
+        <h1>Structure your taxes.<br>Secure your contracts.<br><span class="accent">Grow with certainty.</span></h1>
+        <p class="lead">Joma Consulting Services Ltd helps individuals and businesses plan tax positions, negotiate airtight contracts, and make growth decisions with the numbers already checked.</p>
+        <div class="actions">
+          <a class="btn-primary" href="#contact">Book a Consultation</a>
+          <a class="btn-ghost" href="#services">See What We Handle</a>
+        </div>
+        <div class="hero-micro">
+          <span>FIRS-Registered Agents</span>
+          <span>11 Specialist Departments</span>
+          <span>48hr Contract Turnaround</span>
+        </div>
+      </div>
+      <div class="bracket-card" aria-hidden="true">
+        <div class="bc-head">
+          <span class="t">Progressive Tax Bracket View</span>
+          <span class="s">LIVE · SAMPLE</span>
+        </div>
+        <div class="ladder">
+          <div class="bar-col"><div class="bar"></div><span class="pct">7%</span><span class="band-lbl">Band 1</span></div>
+          <div class="bar-col"><div class="bar"></div><span class="pct">11%</span><span class="band-lbl">Band 2</span></div>
+          <div class="bar-col"><div class="bar"></div><span class="pct">15%</span><span class="band-lbl">Band 3</span></div>
+          <div class="bar-col"><div class="bar"></div><span class="pct">19%</span><span class="band-lbl">Band 4</span></div>
+          <div class="bar-col"><div class="bar"></div><span class="pct">24%</span><span class="band-lbl">Band 5</span></div>
+        </div>
+        <div class="bc-foot">
+          <span class="lbl">Effective planning can lower this curve</span>
+          <span class="val">↑ optimised</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="trust">
+  <div class="wrap">
+    <div class="trust-strip reveal">
+      <div class="trust-item"><div class="num" data-count="11">0</div><div class="lbl">Specialist departments across tax and operations</div></div>
+      <div class="trust-item"><div class="num" data-count="500" data-suffix="+">0+</div><div class="lbl">Filings and returns handled to date</div></div>
+      <div class="trust-item"><div class="num" data-count="48" data-suffix="hr">0hr</div><div class="lbl">Typical turnaround on a contract review</div></div>
+      <div class="trust-item"><div class="num">FIRS</div><div class="lbl">Registered tax agent status</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="band-pale">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">What We Handle</div>
+      <h2>Three ways we keep you ahead</h2>
+      <p>Every engagement fits one of three lanes — and most clients end up using all three at once.</p>
+    </div>
+    <div class="pillars reveal">
+      <div class="pillar">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9 9.5c0-1.4 1.3-2.5 3-2.5s3 1 3 2.2c0 2.8-6 1.3-6 4.1 0 1.2 1.3 2.2 3 2.2s3-1.1 3-2.5"/></svg></div>
+        <h3>Tax Consulting</h3><p>Individual, corporate, international, and indirect tax — planning, filing, and representation during audits or disputes with revenue authorities.</p>
+      </div>
+      <div class="pillar">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 13l2 2 4-4"/></svg></div>
+        <h3>Contract Solutions</h3><p>Drafting, reviewing, and structuring commercial contracts and transfer pricing arrangements so obligations are clear before they're signed.</p>
+      </div>
+      <div class="pillar">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></div>
+        <h3>Business Growth</h3><p>Advisory support that turns compliant tax and contract positions into room to expand, hire, and invest with confidence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">How We Work</div>
+      <h2>From filing to negotiation</h2>
+      <p>A typical engagement moves through four stages, whether it starts as a tax question or a contract question.</p>
+    </div>
+    <div class="flow reveal">
+      <div class="flow-step"><h4>Assess</h4><p>We review your current filings, contracts, or structure to find exposure and opportunity.</p></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><h4>Plan</h4><p>A position is proposed — a filing strategy, a contract structure, or both — with the trade-offs laid out.</p></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><h4>Execute</h4><p>Returns are filed, agreements are drafted and reviewed, and paperwork is handled end to end.</p></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><h4>Monitor</h4><p>We track deadlines, renewals, and regulatory changes so nothing lapses quietly.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="departments" class="band-pale">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">Inside The Firm</div>
+      <h2>Eleven departments, two functions</h2>
+      <p>Specialist tax teams are backed by the operational departments that keep client work moving.</p>
+    </div>
+    <div class="dept-grid reveal">
+      <div class="dept-group">
+        <h4>Core Tax Services</h4>
+        <div class="dept-row"><span class="tag">01</span><span class="t">Individual Tax Services</span></div>
+        <div class="dept-row"><span class="tag">02</span><span class="t">Corporate &amp; Business Tax</span></div>
+        <div class="dept-row"><span class="tag">03</span><span class="t">International Tax</span></div>
+        <div class="dept-row"><span class="tag">04</span><span class="t">Indirect Tax (VAT / Sales Tax)</span></div>
+        <div class="dept-row"><span class="tag">05</span><span class="t">Tax Controversy &amp; Resolution</span></div>
+        <div class="dept-row"><span class="tag">06</span><span class="t">Transfer Pricing</span></div>
+      </div>
+      <div class="dept-group">
+        <h4>Support &amp; Operations</h4>
+        <div class="dept-row"><span class="tag">07</span><span class="t">Bookkeeping &amp; Accounting</span></div>
+        <div class="dept-row"><span class="tag">08</span><span class="t">Compliance &amp; Quality Control</span></div>
+        <div class="dept-row"><span class="tag">09</span><span class="t">Information Technology</span></div>
+        <div class="dept-row"><span class="tag">10</span><span class="t">Client Relations &amp; Marketing</span></div>
+        <div class="dept-row"><span class="tag">11</span><span class="t">Administration &amp; Human Resources</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quote-band">
+  <div class="wrap band-inner reveal">
+    <div>
+      <blockquote>"Compliance and growth aren't in tension — they're the same conversation, once someone's checked the numbers."</blockquote>
+      <div class="attrib">— Office of the Managing Director, Joma Consulting</div>
+    </div>
+    <div class="band-seal"><span>Joma</span></div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">Before You Reach Out</div>
+      <h2>Frequently asked questions</h2>
+      <p>The most common questions we hear from prospective clients — ask us anything else directly.</p>
+    </div>
+    <div class="faq-list reveal">
+      <details class="faq">
+        <summary>How is Joma different from a law firm or accounting firm?<span class="chev">+</span></summary>
+        <div class="faq-body">We sit between the two — most of our work is tax-first, but contracts and tax positions are usually tangled together in practice. Rather than referring you elsewhere for the contract half of a tax question, one team handles both.</div>
+      </details>
+      <details class="faq">
+        <summary>Can you help if I'm already mid-dispute with FIRS?<span class="chev">+</span></summary>
+        <div class="faq-body">Yes — Tax Controversy &amp; Resolution handles active disputes, audits, and appeals. The sooner you bring us in, the more options are usually still open, but we take on cases already in progress regularly.</div>
+      </details>
+      <details class="faq">
+        <summary>Do you handle both personal and company tax filings?<span class="chev">+</span></summary>
+        <div class="faq-body">Both. Individual Tax Services covers personal returns and family filings; Corporate &amp; Business Tax handles company returns, partnerships, and group structures.</div>
+      </details>
+      <details class="faq">
+        <summary>How fast can you turn around a contract review?<span class="chev">+</span></summary>
+        <div class="faq-body">Standard commercial contracts typically come back within 48 hours. More complex agreements — cross-border terms, transfer pricing arrangements — usually take longer, and we'll tell you a realistic timeline upfront.</div>
+      </details>
+      <details class="faq">
+        <summary>What happens after I book a consultation?<span class="chev">+</span></summary>
+        <div class="faq-body">A department head confirms your slot, typically within one business day. From there, documents, notes, and status updates all stay visible under My Requests in the client dashboard.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="contact">
+  <div class="wrap">
+    <div class="cta-box reveal">
+      <h2>Let's look at your numbers before FIRS does.</h2>
+      <p>Bring your filings, your draft contract, or just a question — we'll tell you where you stand.</p>
+      <div class="actions" style="justify-content:center;">
+        <a class="btn-primary" href="mailto:hello@jomaconsulting.com">hello@jomaconsulting.com</a>
+        <a class="btn-ghost" href="tel:+2340000000000">+234 000 000 0000</a>
+        <button class="btn-ghost" onclick="openGate()">Open Client Dashboard</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="brand-line">Joma Consulting Services Ltd</div>
+        <p style="max-width:340px;line-height:1.7;">Tax consulting, contract solutions, and business growth advisory. Design prototype — content and figures shown are placeholders pending final sign-off.</p>
+      </div>
+      <div>
+        <h5>Firm</h5>
+        <ul><li><a href="#services">Services</a></li><li><a href="#process">How We Work</a></li><li><a href="#departments">Departments</a></li><li><a href="#faq">FAQ</a></li></ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <ul><li><a href="mailto:hello@jomaconsulting.com">hello@jomaconsulting.com</a></li><li><a href="tel:+2340000000000">+234 000 000 0000</a></li><li>Abuja, Nigeria</li></ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Joma Consulting Services Ltd. All rights reserved.</span>
+      <span>Design prototype — not for public deployment</span>
+    </div>
+  </div>
+</footer>
+</div>
+
+<!-- ============ PORTAL GATE (sign in / create account) ============ -->
+<div id="portalGate" onclick="handleGateOverlayClick(event)">
+  <div class="gate-card">
+    <button class="gate-close" onclick="closeGate()" aria-label="Close portal modal">✕</button>
+    <div class="gate-brand">
+      <span class="mark" style="width:32px;height:32px;border-radius:50%;background:conic-gradient(from 210deg, var(--navy) 0deg 190deg, var(--green) 190deg 360deg);display:flex;align-items:center;justify-content:center;"><span style="color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;">J</span></span>
+      <span style="font-family:'Space Grotesk',sans-serif;color:var(--navy);font-size:14.5px;font-weight:700;">Client Portal</span>
+    </div>
+    <div class="gate-tabs">
+      <button id="tabSignIn" class="active" onclick="setGateTab('signin')">Sign In</button>
+      <button id="tabCreate" onclick="setGateTab('create')">Create Account</button>
+    </div>
+
+    <div id="gateSignIn">
+      <h2>Welcome back</h2>
+      <div class="sub">Sign in to track engagements, upload documents, and manage consultations.</div>
+      <div class="field"><label>Email address</label><input type="email" placeholder="you@company.com" value="tunde.alabi@example.com"></div>
+      <div class="field"><label>Password</label><input type="password" placeholder="••••••••" value="••••••••"></div>
+      <button class="btn-primary" style="width:100%;justify-content:center;" onclick="enterPortal()">Sign In</button>
+    </div>
+
+    <div id="gateCreate" style="display:none;">
+      <h2>Create your account</h2>
+      <div class="sub">Set up client access in a few minutes — no engagement required to get started.</div>
+      <div class="field"><label>Full name</label><input type="text" placeholder="e.g. Tunde Alabi"></div>
+      <div class="field"><label>Company / organisation</label><input type="text" placeholder="Optional, for corporate clients"></div>
+      <div class="field"><label>Email address</label><input type="email" placeholder="you@company.com"></div>
+      <button class="btn-primary" style="width:100%;justify-content:center;" onclick="enterPortal()">Create Account &amp; Continue</button>
+    </div>
+
+    <div class="gate-foot">By continuing you agree to Joma's engagement terms. <button onclick="enterPortal()">Continue as guest →</button></div>
+  </div>
+</div>
+
+<!-- ============ CLIENT PORTAL (DASHBOARD) ============ -->
+<div id="portal">
+  <div class="p-topbar">
+    <button class="p-brand" onclick="exitPortal()">
+      <span class="mark" style="width:32px;height:32px;border-radius:50%;background:conic-gradient(from 210deg, var(--navy) 0deg 190deg, var(--green) 190deg 360deg);display:flex;align-items:center;justify-content:center;"><span style="color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;">J</span></span>
+      <span class="name">Joma Consulting<small>Client Portal</small></span>
+    </button>
+    <div class="p-top-right">
+      <button class="p-link-back" onclick="exitPortal()">← Back to website</button>
+      <div class="p-user">
+        <div class="p-avatar">TA</div>
+        <div><div class="u-name">Tunde Alabi</div><div class="u-sub">Business Client</div></div>
+      </div>
+      <button class="p-signout" onclick="exitPortal()">Sign out</button>
+    </div>
+  </div>
+
+  <div class="p-shell">
+    <div class="p-sidebar">
+      <div class="grp">Portal</div>
+      <div class="p-nav-item active" data-page="overview" onclick="setPage('overview')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        Overview
+      </div>
+      <div class="p-nav-item" data-page="book" onclick="setPage('book')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
+        Book a Consultation
+      </div>
+      <div class="p-nav-item" data-page="requests" onclick="setPage('requests')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 2l4 4-4 4M21 6H9a4 4 0 00-4 4v1M7 22l-4-4 4-4M3 18h12a4 4 0 004-4v-1"/></svg>
+        My Requests <span class="cnt" id="reqCnt">3</span>
+      </div>
+      <div class="p-nav-item" data-page="documents" onclick="setPage('documents')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+        Documents <span class="cnt" id="docCnt">4</span>
+      </div>
+      <div class="p-nav-item" data-page="profile" onclick="setPage('profile')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+        Profile &amp; Settings
+      </div>
+    </div>
+
+    <div class="p-main">
+
+      <!-- OVERVIEW -->
+      <div class="p-page" id="page-overview">
+        <div class="p-page-head">
+          <div><h1>Welcome back, Tunde.</h1><div class="sub">Here's where things stand across your engagements with Joma Consulting.</div></div>
+          <button class="btn-primary" onclick="setPage('book')">+ Book a Consultation</button>
+        </div>
+        <div class="p-stat-grid">
+          <div class="p-stat-card p-glass"><div class="lbl">Active Engagements</div><div class="val" id="statActive">2</div></div>
+          <div class="p-stat-card p-glass"><div class="lbl">Pending Requests</div><div class="val" id="statPending">1</div></div>
+          <div class="p-stat-card p-glass"><div class="lbl">Documents Shared</div><div class="val" id="statDocs">4</div></div>
+          <div class="p-stat-card p-glass p-glass-green"><div class="lbl">Next Consultation</div><div class="val" id="statNext" style="font-size:19px;">Sep 3 <small>2:00 PM</small></div></div>
+        </div>
+        <div class="p-grid-2">
+          <div class="p-card p-glass">
+            <h3>Recent Activity</h3>
+            <div class="p-card-sub">A running log of updates on your account.</div>
+            <div id="activityFeed"></div>
+          </div>
+          <div class="p-card p-glass p-glass-green">
+            <h3>Upcoming Consultation</h3>
+            <div class="p-card-sub">Confirmed appointment</div>
+            <div class="p-consult-card">
+              <div class="p-consult-date">
+                <div class="d"><div class="day">03</div><div class="mon">Sep</div></div>
+                <div class="info"><div class="t">Transfer Pricing Review</div><div class="s">2:00 PM · Video Call</div></div>
+              </div>
+              <p style="color:#8FA098;font-size:12.5px;line-height:1.6;margin:0;">With the Transfer Pricing department. A calendar invite and video link will be sent 24 hours before the session.</p>
+              <button class="btn-ghost" style="width:100%;justify-content:center;border-color:rgba(255,255,255,.2);color:#fff;" onclick="toast('Reschedule requests are reviewed within one business day.')">Request Reschedule</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOOK A CONSULTATION -->
+      <div class="p-page" id="page-book" style="display:none;">
+        <div class="p-page-head"><div><h1>Book a Consultation</h1><div class="sub">Tell us what you need — a department head will confirm a time.</div></div></div>
+        <div class="p-grid-2">
+          <div class="p-card p-glass p-form">
+            <h3>Consultation Details</h3>
+            <div class="p-card-sub">Fields marked required must be completed.</div>
+            <div class="field"><label>Department / Service *</label>
+              <select id="bookDept">
+                <option>Individual Tax Services</option>
+                <option>Corporate & Business Tax</option>
+                <option>International Tax</option>
+                <option>Indirect Tax (VAT/Sales Tax)</option>
+                <option>Tax Controversy & Resolution</option>
+                <option selected>Transfer Pricing</option>
+                <option>Bookkeeping & Accounting</option>
+              </select>
+            </div>
+            <div class="p-form-row">
+              <div class="field"><label>Preferred date *</label><input type="date" id="bookDate" value="2026-09-09"></div>
+              <div class="field"><label>Preferred time</label><input type="time" id="bookTime" value="14:00"></div>
+            </div>
+            <div class="field"><label>Preferred format</label>
+              <div class="p-level-options">
+                <div class="p-chip-opt sel" data-fmt="Video Call" onclick="selFmt(this)">Video Call</div>
+                <div class="p-chip-opt" data-fmt="Phone Call" onclick="selFmt(this)">Phone Call</div>
+                <div class="p-chip-opt" data-fmt="In Person" onclick="selFmt(this)">In Person</div>
+              </div>
+            </div>
+            <div class="field"><label>What do you need help with? *</label><textarea id="bookNotes" rows="4" placeholder="e.g. Reviewing our related-party pricing policy ahead of the FIRS filing deadline."></textarea></div>
+            <button class="btn-primary" style="width:100%;justify-content:center;" onclick="submitBooking()">Submit Request</button>
+          </div>
+          <div class="p-card p-glass">
+            <h3>What happens next</h3>
+            <div class="p-card-sub">A typical turnaround</div>
+            <div class="p-activity-row"><div class="p-activity-dot"></div><div><div class="txt"><b>Within 1 business day</b> — a department head reviews your request.</div></div></div>
+            <div class="p-activity-row"><div class="p-activity-dot"></div><div><div class="txt"><b>Confirmation</b> — you'll receive a confirmed time and a calendar invite.</div></div></div>
+            <div class="p-activity-row"><div class="p-activity-dot"></div><div><div class="txt"><b>Follow-up</b> — notes and any requested documents appear under My Requests.</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MY REQUESTS -->
+      <div class="p-page" id="page-requests" style="display:none;">
+        <div class="p-page-head"><div><h1>My Requests</h1><div class="sub">Every engagement and consultation you've requested, in one place.</div></div></div>
+        <div class="p-card p-glass" style="padding:0;overflow:hidden;">
+          <table class="p-table" id="requestsTable">
+            <thead><tr><th>Service</th><th>Requested</th><th>Status</th><th>Next Step</th></tr></thead>
+            <tbody id="requestsBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- DOCUMENTS -->
+      <div class="p-page" id="page-documents" style="display:none;">
+        <div class="p-page-head"><div><h1>Documents</h1><div class="sub">Upload files for an active engagement, or download items shared back with you.</div></div></div>
+        <input type="file" id="filePicker" style="display:none;" onchange="handleFileSelected(this)">
+        <div class="p-dropzone p-glass" id="dropzone">
+          <div class="ic">📤</div>
+          <h4>Drag files here, or browse</h4>
+          <p>Accepted: PDF, DOCX, XLSX, JPG — up to 25MB per file.</p>
+          <button class="btn-ghost" style="border-color:rgba(255,255,255,.2);color:#fff;" onclick="triggerFilePicker()">Choose File</button>
+        </div>
+        <div class="p-card p-glass" style="padding:8px 24px;">
+          <h3 style="margin-top:14px;">Shared with Joma Consulting</h3>
+          <div class="p-card-sub" id="docSubCount">4 documents</div>
+          <div id="docList"></div>
+        </div>
+      </div>
+
+      <!-- PROFILE -->
+      <div class="p-page" id="page-profile" style="display:none;">
+        <div class="p-page-head"><div><h1>Profile &amp; Settings</h1><div class="sub">Keep your contact details current so nothing gets missed.</div></div></div>
+        <div class="p-grid-2">
+          <div class="p-card p-glass p-form">
+            <h3>Account Details</h3>
+            <div class="p-form-row">
+              <div class="field"><label>Full name</label><input type="text" value="Tunde Alabi"></div>
+              <div class="field"><label>Company / organisation</label><input type="text" value="Coral Foods Ltd"></div>
+            </div>
+            <div class="p-form-row">
+              <div class="field"><label>Email address</label><input type="email" value="tunde.alabi@example.com"></div>
+              <div class="field"><label>Phone number</label><input type="tel" value="+234 802 000 0000"></div>
+            </div>
+            <button class="btn-primary" onclick="toast('Profile changes saved.')">Save Changes</button>
+          </div>
+          <div class="p-card p-glass">
+            <h3>Notification Preferences</h3>
+            <div class="p-card-sub">Choose how Joma Consulting reaches you</div>
+            <div class="p-toggle-row"><div><div class="t">Email updates</div><div class="s">Engagement status changes</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+            <div class="p-toggle-row"><div><div class="t">SMS reminders</div><div class="s">24 hours before consultations</div></div><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+            <div class="p-toggle-row"><div><div class="t">Marketing updates</div><div class="s">Firm news and insights</div></div><label class="switch"><input type="checkbox"><span class="track"></span></label></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="p-toast"></div>
+
+<script>
+  function toggleMobileMenu(){
+    const menu = document.getElementById('mobileMenu');
+    const btn = document.getElementById('menuToggle');
+    if (!menu || !btn) return;
+    const open = menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.textContent = open ? '✕' : '☰';
+  }
+  function closeMobileMenu(){
+    const menu = document.getElementById('mobileMenu');
+    const btn = document.getElementById('menuToggle');
+    if (!menu || !btn) return;
+    menu.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.textContent = '☰';
+  }
+
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+      }
+    });
+  },{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  const navWrap = document.getElementById('navWrap');
+  if (navWrap) {
+    window.addEventListener('scroll', ()=>{
+      navWrap.style.top = window.scrollY > 40 ? '10px' : '18px';
+    });
+  }
+
+  /* ---- count-up numbers in trust strip ---- */
+  const counted = new WeakSet();
+  const countIo = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting && !counted.has(e.target)){
+        counted.add(e.target);
+        const target = parseInt(e.target.dataset.count, 10);
+        if (isNaN(target)) return;
+        const suffix = e.target.dataset.suffix || '';
+        const dur = 1200, start = performance.now();
+        function tick(now){
+          const p = Math.min(1, (now-start)/dur);
+          const eased = 1 - Math.pow(1-p, 3);
+          e.target.textContent = Math.round(eased*target) + suffix;
+          if(p<1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+    });
+  },{threshold:0.35});
+  document.querySelectorAll('[data-count]').forEach(el=>countIo.observe(el));
+
+  /* ---- portal gate ---- */
+  function openGate(){
+    document.body.classList.add('portal-gate-open');
+    const gate = document.getElementById('portalGate');
+    if (gate) gate.style.display='flex';
+    closeMobileMenu();
+  }
+  function closeGate(){
+    document.body.classList.remove('portal-gate-open');
+    const gate = document.getElementById('portalGate');
+    if (gate) gate.style.display='none';
+  }
+  function handleGateOverlayClick(e){
+    if (e.target.id === 'portalGate') {
+      closeGate();
+    }
+  }
+  document.addEventListener('keydown', (e)=>{
+    if (e.key === 'Escape') {
+      closeGate();
+      closeMobileMenu();
+    }
+  });
+
+  function setGateTab(tab){
+    const tabSignIn = document.getElementById('tabSignIn');
+    const tabCreate = document.getElementById('tabCreate');
+    const gateSignIn = document.getElementById('gateSignIn');
+    const gateCreate = document.getElementById('gateCreate');
+
+    if (tabSignIn) tabSignIn.classList.toggle('active', tab==='signin');
+    if (tabCreate) tabCreate.classList.toggle('active', tab==='create');
+    if (gateSignIn) gateSignIn.style.display = tab==='signin' ? 'block' : 'none';
+    if (gateCreate) gateCreate.style.display = tab==='create' ? 'block' : 'none';
+  }
+
+  function enterPortal(){
+    closeGate();
+    document.body.classList.add('portal-open');
+    const site = document.getElementById('site');
+    const portal = document.getElementById('portal');
+    if (site) site.style.display='none';
+    if (portal) portal.style.display='block';
+    window.scrollTo(0,0);
+    setPage('overview');
+    renderActivity();
+    renderRequests();
+    renderDocs();
+  }
+
+  function exitPortal(){
+    document.body.classList.remove('portal-open');
+    const portal = document.getElementById('portal');
+    const site = document.getElementById('site');
+    if (portal) portal.style.display='none';
+    if (site) site.style.display='block';
+    window.scrollTo(0,0);
+  }
+
+  function setPage(name){
+    document.querySelectorAll('.p-page').forEach(p=>p.style.display='none');
+    const targetPage = document.getElementById('page-'+name);
+    if (targetPage) targetPage.style.display='block';
+    document.querySelectorAll('.p-nav-item').forEach(n=>n.classList.toggle('active', n.dataset.page===name));
+    window.scrollTo(0,0);
+  }
+
+  let requests = [
+    {service:"Transfer Pricing Review", dept:"Transfer Pricing", date:"Aug 20, 2026", status:"scheduled", next:"Confirmed for Sep 3, 2:00 PM"},
+    {service:"VAT Audit Response — Status Check", dept:"Indirect Tax (VAT/Sales Tax)", date:"Aug 15, 2026", status:"progress", next:"Draft response under FIRS review"},
+    {service:"Corporate Tax Filing FY2025", dept:"Corporate & Business Tax", date:"Jul 28, 2026", status:"done", next:"Completed — filed Aug 1, 2026"}
+  ];
+  let activity = [
+    {text:"<b>Transfer Pricing</b> confirmed your consultation for Sep 3.", time:"3 hours ago"},
+    {text:"<b>Indirect Tax</b> requested supporting invoices for the VAT case.", time:"Yesterday"},
+    {text:"You uploaded <b>Q3 2026 Sales Ledger.xlsx</b>.", time:"Yesterday"},
+    {text:"<b>Corporate & Business Tax</b> marked your FY2025 filing as completed.", time:"Aug 1, 2026"}
+  ];
+  let documents = [
+    {name:"Q3 2026 Sales Ledger.xlsx", meta:"Uploaded by you · 1 day ago", status:"Under Review", ic:"📊"},
+    {name:"Signed Engagement Letter.pdf", meta:"Shared by Joma Consulting · 3 weeks ago", status:"Approved", ic:"📄"},
+    {name:"FY2025 Corporate Tax Return.pdf", meta:"Shared by Joma Consulting · Aug 1, 2026", status:"Filed", ic:"📄"},
+    {name:"Distribution Agreement — Draft.docx", meta:"Uploaded by you · 1 month ago", status:"Received", ic:"📄"}
+  ];
+
+  function renderActivity(){
+    const feed = document.getElementById('activityFeed');
+    if (!feed) return;
+    feed.innerHTML = activity.map(a=>`
+      <div class="p-activity-row"><div class="p-activity-dot"></div><div><div class="txt">${a.text}</div><div class="time">${a.time}</div></div></div>
+    `).join('');
+  }
+
+  function statusChip(s){
+    const map = {submitted:['submitted','Submitted'],scheduled:['scheduled','Scheduled'],progress:['progress','In Progress'],done:['done','Completed']};
+    const [cls,label] = map[s] || ['submitted', 'Submitted'];
+    return `<span class="p-chip ${cls}">${label}</span>`;
+  }
+
+  function renderRequests(){
+    const tbody = document.getElementById('requestsBody');
+    const reqCnt = document.getElementById('reqCnt');
+    const statPending = document.getElementById('statPending');
+    if (tbody) {
+      tbody.innerHTML = requests.map(r=>`
+        <tr><td><div class="svc-name">${r.service}</div><div class="svc-sub">${r.dept}</div></td><td>${r.date}</td><td>${statusChip(r.status)}</td><td style="color:#8FA098;">${r.next}</td></tr>
+      `).join('');
+    }
+    if (reqCnt) reqCnt.textContent = requests.length;
+    if (statPending) {
+      const pendingCount = requests.filter(r => r.status === 'submitted' || r.status === 'progress').length;
+      statPending.textContent = pendingCount;
+    }
+  }
+
+  function renderDocs(){
+    const docList = document.getElementById('docList');
+    const docCnt = document.getElementById('docCnt');
+    const docSubCount = document.getElementById('docSubCount');
+    const statDocs = document.getElementById('statDocs');
+
+    if (docList) {
+      docList.innerHTML = documents.map(d=>`
+        <div class="p-doc-row"><div class="p-doc-ic">${d.ic}</div><div><div class="n">${d.name}</div><div class="m">${d.meta} · ${d.status}</div></div><div class="sp"></div><button class="p-icon-btn" title="Download" onclick="toast('File download prepared in production.')">⬇</button></div>
+      `).join('');
+    }
+    if (docCnt) docCnt.textContent = documents.length;
+    if (docSubCount) docSubCount.textContent = `${documents.length} documents`;
+    if (statDocs) statDocs.textContent = documents.length;
+  }
+
+  function selFmt(el){
+    if (!el || !el.parentElement) return;
+    el.parentElement.querySelectorAll('.p-chip-opt').forEach(c=>c.classList.remove('sel'));
+    el.classList.add('sel');
+  }
+
+  function submitBooking(){
+    const dept = document.getElementById('bookDept').value;
+    const notesInput = document.getElementById('bookNotes');
+    const notes = notesInput ? notesInput.value.trim() : '';
+    if(!notes){ toast('Please describe what you need help with.'); return; }
+    
+    requests.unshift({
+      service: dept + " — New Request",
+      dept: dept,
+      date: "Just now",
+      status: "submitted",
+      next: "Awaiting confirmation from department head"
+    });
+    activity.unshift({
+      text: `You requested a consultation with <b>${dept}</b>.`,
+      time: "Just now"
+    });
+    
+    renderRequests();
+    renderActivity();
+    toast("Request submitted — you'll hear back within one business day.");
+    if (notesInput) notesInput.value = '';
+    setPage('requests');
+  }
+
+  function triggerFilePicker(){
+    const picker = document.getElementById('filePicker');
+    if (picker) picker.click();
+    else mockUpload();
+  }
+
+  function handleFileSelected(input){
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      const ic = file.name.endsWith('.xlsx') || file.name.endsWith('.csv') ? '📊' : '📄';
+      documents.unshift({
+        name: file.name,
+        meta: `Uploaded by you · just now`,
+        status: "Received",
+        ic: ic
+      });
+      activity.unshift({
+        text: `You uploaded <b>${file.name}</b>.`,
+        time: "Just now"
+      });
+      renderDocs();
+      renderActivity();
+      toast(`${file.name} uploaded successfully.`);
+      input.value = '';
+    } else {
+      mockUpload();
+    }
+  }
+
+  function mockUpload(){
+    const names = ["Bank Statement — Aug 2026.pdf","Payroll Summary.xlsx","Supplier Contract v2.docx","Fixed Asset Register.xlsx"];
+    const name = names[Math.floor(Math.random()*names.length)];
+    const ic = name.endsWith('.xlsx') ? '📊' : '📄';
+    documents.unshift({name, meta:"Uploaded by you · just now", status:"Received", ic: ic});
+    activity.unshift({text:`You uploaded <b>${name}</b>.`, time:"Just now"});
+    renderDocs();
+    renderActivity();
+    toast(`${name} uploaded successfully.`);
+  }
+
+  const dz = document.getElementById('dropzone');
+  if (dz) {
+    ['dragover','dragleave','drop'].forEach(evt=>{
+      dz.addEventListener(evt, (e)=>{
+        e.preventDefault();
+        if(evt==='dragover') dz.classList.add('drag');
+        else dz.classList.remove('drag');
+        if(evt==='drop') {
+          if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+            handleFileSelected(e.dataTransfer);
+          } else {
+            mockUpload();
+          }
+        }
+      });
+    });
+  }
+
+  function toast(msg){
+    const t = document.getElementById('p-toast');
+    if (!t) return;
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(window._toastTimer);
+    window._toastTimer = setTimeout(()=>t.classList.remove('show'), 2800);
+  }
+</script>
+</body>
+</html>
