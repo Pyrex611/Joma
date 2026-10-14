@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Joma Construction Engineering Ltd | Building and Civil Works, Abuja</title>
+<link rel="icon" type="image/jpeg" href="joma.jpeg">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@1,500&family=Familjen+Grotesk:wght@500;600;700&family=Albert+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F6F8FA;--wh:#fff;--tint:#EAF1F7;--ink:#14202B;--mute:#5C6B7A;--line:#DDE5EC;--or:#F26B1D;--or2:#D95A10;--orS:#FDEBDD;--dk:#0F1923;--dk2:#16232F;--dl:#223445;--r:16px}
+*{box-sizing:border-box;margin:0}html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{font:17px/1.65 'Albert Sans',system-ui,sans-serif;color:var(--ink);background:var(--bg)}
+h1,h2,h3,h4{font-family:'Familjen Grotesk',sans-serif;font-weight:600;letter-spacing:-.025em;line-height:1.08}
+a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--or);outline-offset:3px}
+.wrap{max-width:1160px;margin:auto;padding:0 28px}
+.mono{font-family:'DM Mono',monospace}
+/* nav: floating bar */
+header{position:sticky;top:14px;z-index:50;padding:0 20px}
+.nav{max-width:1160px;margin:auto;background:#ffffffeb;backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:999px;display:flex;align-items:center;gap:22px;padding:9px 10px 9px 20px;box-shadow:0 8px 30px -18px #14202b40}
+.logo{display:flex;align-items:center;gap:11px;font:600 19px 'Familjen Grotesk';letter-spacing:-.02em}
+.logo svg{width:30px;height:30px}
+ul.nav-links{display:flex;gap:26px;list-style:none;padding:0;margin:0 auto;font-weight:500;font-size:15px;color:var(--mute)}
+ul.nav-links a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;border:1px solid var(--ink);font-weight:600;font-size:15px;background:none;color:var(--ink);transition:.2s}
+.btn:hover{background:var(--ink);color:#fff}.btn.sm{padding:9px 18px}
+.btn.pri{background:var(--or);border-color:var(--or);color:#fff}.btn.pri:hover{background:var(--or2);border-color:var(--or2)}
+.burger{display:none;background:none;border:0;font-size:24px;margin-left:auto}
+/* hero */
+.hero{position:relative;padding:96px 0 84px}
+.hero:before{content:"";position:absolute;inset:-100px 0 0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:56px 56px;opacity:.55;-webkit-mask-image:radial-gradient(ellipse 70% 70% at 70% 40%,#000,transparent 75%);mask-image:radial-gradient(ellipse 70% 70% at 70% 40%,#000,transparent 75%);pointer-events:none}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(46px,6.2vw,84px);margin-bottom:24px}
+.hero p.lead{color:var(--mute);font-size:19px;max-width:500px}
+.cta{display:flex;gap:12px;margin-top:34px;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:500;color:var(--mute);background:var(--wh);border:1px solid var(--line);border-radius:999px;padding:6px 14px;margin-bottom:26px}
+.pill i{width:7px;height:7px;border-radius:50%;background:var(--or)}
+.draw{background:var(--wh);border:1px solid var(--line);border-radius:24px;padding:14px;box-shadow:0 30px 70px -40px #14202b55}
+.draw svg{display:block;width:100%}
+.dl{fill:none;stroke:var(--ink);stroke-width:1.4}
+.dr{stroke-dasharray:1;stroke-dashoffset:1;animation:dd 2.2s .2s cubic-bezier(.5,.1,.2,1) forwards}
+@keyframes dd{to{stroke-dashoffset:0}}
+.fadein{opacity:0;animation:fi .9s 1.6s forwards}@keyframes fi{to{opacity:1}}
+/* stat strip */
+.strip{background:var(--wh);border-block:1px solid var(--line)}
+.strip .g{display:grid;grid-template-columns:repeat(4,1fr)}
+.strip .c{padding:34px 28px;border-left:1px solid var(--line)}.strip .c:first-child{border-left:0;padding-left:0}
+.strip b{font:600 54px 'Familjen Grotesk';letter-spacing:-.03em;display:block;line-height:1}
+.strip span{color:var(--mute);font-size:15px;display:flex;align-items:center;gap:7px;margin-top:8px}
+/* generic */
+section{padding:104px 0}.sh{max-width:620px;margin-bottom:52px}.sh h2{font-size:clamp(34px,4.4vw,54px)}.sh p{color:var(--mute);margin-top:16px;font-size:18px}
+.dim{display:flex;align-items:center;gap:0;color:var(--mute);font:500 12px 'DM Mono';margin-bottom:18px}
+.dim:before,.dim:after{content:"";width:1px;height:11px;background:var(--mute)}.dim i{flex:0 0 38px;height:1px;background:var(--mute)}.dim span{padding:0 12px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:var(--wh);border:1px solid var(--line);border-radius:var(--r);padding:34px;transition:.25s}
+.card:hover{border-color:#b8c7d4;box-shadow:0 20px 40px -28px #14202b50}
+.ico{width:46px;height:46px;border-radius:12px;background:var(--tint);display:grid;place-items:center;margin-bottom:22px}
+.ico svg{width:26px;height:26px;stroke:var(--ink);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.card h3{font-size:25px;margin-bottom:10px}.card p{color:var(--mute);font-size:15.5px}
+.card ul{list-style:none;padding:0;margin-top:18px;border-top:1px solid var(--line);padding-top:14px;font-size:14.5px;color:var(--mute)}.card li{padding:3px 0}
+/* projects */
+.alt{background:var(--tint)}
+.pj{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.pc{background:var(--wh);border-radius:var(--r);border:1px solid var(--line);overflow:hidden}
+.pc .th{height:190px;background:var(--bg);border-bottom:1px solid var(--line);position:relative}.pc .th svg{width:100%;height:100%}
+.pc .t{padding:24px}.pc h3{font-size:23px}.pc p{color:var(--mute);font-size:14.5px;margin:6px 0 18px}
+.bar{height:6px;background:var(--line);border-radius:6px;overflow:hidden}.bar i{display:block;height:100%;background:var(--or);border-radius:6px}
+.pc small{display:flex;justify-content:space-between;margin-top:9px;font:500 13px 'DM Mono';color:var(--mute)}
+/* process */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;position:relative}
+.steps:before{content:"";position:absolute;top:19px;left:0;right:0;border-top:1px solid var(--line)}
+.step{position:relative}.step .n{width:38px;height:38px;border-radius:50%;background:var(--bg);border:1px solid var(--ink);display:grid;place-items:center;font:500 14px 'DM Mono';margin-bottom:22px;position:relative}
+.step:nth-child(3) .n{background:var(--or);border-color:var(--or);color:#fff}
+.step h3{font-size:22px;margin-bottom:8px}.step p{color:var(--mute);font-size:15px}
+/* departments */
+.dep{display:grid;grid-template-columns:1fr 1fr;gap:20px}.dep .card{padding:30px 34px}.dep h4{font-size:20px;margin-bottom:12px}
+.dep li{list-style:none;display:flex;gap:16px;padding:11px 0;border-top:1px solid var(--line);font-weight:500}.dep ul{padding:0}.dep li span{font:400 13px 'DM Mono';color:var(--mute);padding-top:3px}
+/* safety */
+.safe{display:grid;grid-template-columns:1.1fr 1fr;gap:20px}
+.safe .a{background:var(--ink);color:#fff;border-radius:24px;padding:54px}.safe .a h2{font-size:clamp(32px,4vw,46px)}.safe .a p{color:#a9b6c3;margin-top:16px;max-width:460px}
+.safe .b{background:var(--wh);border:1px solid var(--line);border-radius:24px;padding:44px;display:flex;flex-direction:column;justify-content:space-between;gap:30px}
+.safe .b b{font:600 clamp(80px,10vw,128px)/.9 'Familjen Grotesk';letter-spacing:-.05em;display:block}
+.safe .b span{display:flex;align-items:center;gap:10px;color:var(--mute)}.safe .b svg{width:22px;height:22px}
+.quote{margin-top:20px;background:var(--wh);border:1px solid var(--line);border-radius:24px;padding:46px 54px;font:500 clamp(22px,2.6vw,30px)/1.35 'Familjen Grotesk';letter-spacing:-.015em}
+.quote small{display:block;font:400 15px 'Albert Sans';color:var(--mute);margin-top:16px;letter-spacing:0}
+/* faq */
+.faq details{background:var(--wh);border:1px solid var(--line);border-radius:14px;padding:22px 26px;margin-bottom:10px}
+.faq summary{font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:20px}.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"+";color:var(--or);font-size:24px;line-height:1}.faq details[open] summary:after{content:"\2212"}
+.faq p{color:var(--mute);margin-top:12px;max-width:720px}
+.final{background:var(--ink);color:#fff;border-radius:28px;padding:72px 64px;display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap;position:relative;overflow:hidden}
+.final:before{content:"";position:absolute;inset:0;background-image:linear-gradient(#ffffff0f 1px,transparent 1px),linear-gradient(90deg,#ffffff0f 1px,transparent 1px);background-size:48px 48px;-webkit-mask-image:linear-gradient(90deg,transparent,#000);mask-image:linear-gradient(90deg,transparent,#000)}
+.final>*{position:relative}.final h2{font-size:clamp(34px,4.4vw,54px);max-width:560px}.final p{color:#a9b6c3;margin-top:12px}
+.final .btn{border-color:#ffffff66;color:#fff}.final .btn:hover{background:#fff;color:var(--ink)}.final .btn.pri{border-color:var(--or)}.final .btn.pri:hover{background:var(--or2);color:#fff}
+footer{padding:80px 0 34px;color:var(--mute);font-size:15px}
+footer .fg{display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px;padding-bottom:40px;border-bottom:1px solid var(--line)}footer h5{color:var(--ink);font:600 15px 'Albert Sans';margin-bottom:10px}footer a{display:block;padding:3px 0}footer a:hover{color:var(--ink)}
+.logo img.lg{width:34px;height:34px;border-radius:50%;object-fit:cover;object-position:50% 16%;background:#fff;border:1px solid var(--line);flex:none}
+.hero h1 em{font-family:'Fraunces',serif;font-style:italic;font-weight:500;color:var(--or2);letter-spacing:-.02em}
+.quote{font-family:'Fraunces',serif;font-style:italic;font-weight:500}
+.dep{grid-template-columns:repeat(3,1fr)}.dep small{display:block;font:400 13.5px/1.45 'Albert Sans';color:var(--mute);margin-top:2px}.dep li>div{font-weight:500}
+@media(max-width:980px){.dep{grid-template-columns:1fr}}
+/* portal */
+#portal{position:fixed;inset:0;z-index:100;background:var(--dk);display:none;color:#dfe7ee}#portal.on{display:block}
+#auth{position:absolute;inset:0;display:grid;place-items:center;background:var(--dk);z-index:2;padding:20px}
+#auth .bx{width:min(440px,100%);background:var(--dk2);border:1px solid var(--dl);border-radius:20px;padding:36px}
+.tabs{display:flex;background:var(--dk);border-radius:999px;padding:4px;margin:22px 0}.tabs button{flex:1;background:none;border:0;color:#8ea0b2;padding:9px;border-radius:999px;font-weight:600}.tabs button.a{background:var(--dl);color:#fff}
+#app{display:none;position:absolute;inset:0;grid-template-columns:250px 1fr}#app.on{display:grid}
+.sb{padding:24px 16px;border-right:1px solid var(--dl);display:flex;flex-direction:column;gap:3px}.sb .logo{color:#fff;margin:0 8px 28px}
+.sb button{background:none;border:0;color:#8ea0b2;text-align:left;padding:11px 14px;border-radius:10px;font-weight:500;display:flex;justify-content:space-between;align-items:center}
+.sb button:hover{color:#fff}.sb button.a{background:var(--dk2);color:#fff;box-shadow:inset 2px 0 var(--or)}
+.sb em{background:var(--dl);color:#dfe7ee;font:500 12px 'DM Mono';font-style:normal;border-radius:8px;padding:1px 8px}
+.usr{margin-top:auto;padding:14px;background:var(--dk2);border:1px solid var(--dl);border-radius:14px;display:flex;gap:12px;align-items:center;font-size:14px}
+.av{width:38px;height:38px;border-radius:50%;background:var(--dl);display:grid;place-items:center;flex:none}.av svg{width:22px;height:22px}
+.main{overflow:auto;padding:36px 44px}.main h1{font-size:40px;color:#fff;margin-bottom:6px}.sub{color:#8ea0b2;margin-bottom:28px}
+.top{display:flex;justify-content:space-between;align-items:start;gap:20px}
+.view{display:none}.view.on{display:block}
+.kp{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px}
+.k{background:var(--dk2);border:1px solid var(--dl);border-radius:14px;padding:20px}.k b{font:600 34px 'Familjen Grotesk';color:#fff;display:block;letter-spacing:-.03em}.k span{font-size:14px;color:#8ea0b2}
+.pn{background:var(--dk2);border:1px solid var(--dl);border-radius:16px;padding:24px;margin-bottom:16px}.pn h3{font-size:19px;color:#fff;margin-bottom:4px}.pn .sub{font-size:14px;margin-bottom:18px}
+.two{display:grid;grid-template-columns:1.4fr 1fr;gap:16px}
+.pr{margin-bottom:20px}.pr .row{display:flex;justify-content:space-between;margin-bottom:8px;font-size:15px}.pr .row span:last-child{font-family:'DM Mono'}.pn .bar{background:var(--dl)}
+.act{list-style:none;padding:0;font-size:15px}.act li{padding:12px 0 12px 20px;border-top:1px solid var(--dl);position:relative;color:#c3cfda}.act li:first-child{border:0}
+.act li:before{content:"";position:absolute;left:0;top:20px;width:7px;height:7px;border-radius:50%;background:#3b5167}.act li.d:before{background:var(--or)}
+.act small{display:block;color:#8ea0b2;font:400 12px 'DM Mono'}
+.cal{display:flex;gap:18px;align-items:center}.cal .d{width:68px;height:76px;border-radius:14px;background:var(--dk);border:1px solid var(--dl);text-align:center;padding-top:10px;font:600 28px 'Familjen Grotesk';line-height:1}.cal .d small{display:block;font:500 12px 'DM Mono';color:var(--or);margin-top:6px}
+table{width:100%;border-collapse:collapse;font-size:15px}th{text-align:left;color:#8ea0b2;font-weight:500;font-size:13px;padding:10px 12px;border-bottom:1px solid var(--dl)}td{padding:15px 12px;border-bottom:1px solid var(--dl)}tr:last-child td{border:0}
+.tag{padding:3px 12px;border-radius:99px;font-size:13px;font-weight:600;background:var(--dl);color:#c3cfda}.tag.g{background:#143528;color:#6fe3a5}.tag.o{background:#3d2411;color:#ffb27a}.tag.b{background:#16304a;color:#8cc4f5}
+.drop{border:1.5px dashed #34495d;border-radius:16px;padding:44px;text-align:center;color:#8ea0b2;cursor:pointer;transition:.2s}.drop:hover,.drop.h{border-color:var(--or);color:#fff;background:var(--dk2)}.drop b{color:#fff;display:block;font-weight:600;margin-bottom:4px}
+.fm label{display:block;font-size:14px;color:#8ea0b2;margin:16px 0 7px}.fm input,.fm select,.fm textarea{width:100%;background:var(--dk);border:1px solid var(--dl);border-radius:10px;padding:12px 14px;color:#fff;font:inherit}
+.fm .r2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.fm input:focus,.fm select:focus,.fm textarea:focus{outline:0;border-color:var(--or)}
+.x{background:var(--dk2);border:1px solid var(--dl);color:#dfe7ee;border-radius:99px;padding:9px 18px;font-weight:500;font-size:14px;white-space:nowrap}.x:hover{border-color:#4d667d}
+.link{background:none;border:0;color:#8ea0b2;font-size:14px;margin-top:16px;text-decoration:underline}
+#toast{position:fixed;bottom:28px;left:50%;transform:translate(-50%,100px);background:var(--wh);color:var(--ink);border-radius:12px;padding:14px 22px;z-index:300;transition:.35s;box-shadow:0 20px 50px -20px #000;font-weight:500;border-left:4px solid var(--or)}#toast.on{transform:translate(-50%,0)}
+@media(max-width:900px){.hero .wrap,.cards,.pj,.steps,.dep,.safe,footer .fg,.two{grid-template-columns:1fr}.strip .g,.kp{grid-template-columns:1fr 1fr}.strip .c:nth-child(3){border-left:0;padding-left:0}ul.nav-links,.nav>.btn{display:none}.burger{display:block}
+ul.nav-links.open{display:flex;flex-direction:column;position:absolute;top:66px;left:20px;right:20px;background:var(--wh);border:1px solid var(--line);border-radius:20px;padding:22px;margin:0}.steps:before{display:none}section{padding:72px 0}.final,.safe .a{padding:38px 28px}.hero{padding-top:60px}
+#app{grid-template-columns:1fr;grid-template-rows:auto 1fr}.sb{flex-direction:row;overflow:auto;padding:10px}.sb .logo,.usr{display:none}.sb button{white-space:nowrap}.main{padding:24px 20px}.top{flex-direction:column}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}.dr{stroke-dashoffset:0}.fadein{opacity:1}}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="hat" viewBox="0 0 32 32"><path d="M5 21a11 11 0 0 1 22 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M13.5 10.2V21M18.5 10.2V21M3 21h26v3.5H3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+<symbol id="cone" viewBox="0 0 24 24"><path d="M10 3h4l5 15H5zM7.5 11h9M6.3 15h11.4M3 21h18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="mark" viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="#14202B"/><path d="M7 23V10l5 7 4-7 4 7 5-7v13" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 26h20" stroke="#F26B1D" stroke-width="2" stroke-linecap="round"/></symbol>
+</defs></svg>
+
+<header><div class="nav">
+<a class="logo" href="#top"><img src="joma.jpeg" alt="Joma Construction Engineering logo" class="lg">Joma Construction</a>
+<ul class="nav-links" id="nl"><li><a href="#services">Services</a></li><li><a href="#projects">Projects</a></li><li><a href="#process">Process</a></li><li><a href="#departments">Departments</a></li><li><a href="#safety">Safety</a></li><li><a href="#faq">FAQ</a></li></ul>
+<button class="btn sm" onclick="openP()">Client dashboard</button><a class="btn pri sm" href="#contact">Request a quote</a>
+<button class="burger" aria-label="Menu" onclick="nl.classList.toggle('open')">&#9776;</button></div></header>
+
+<main id="top">
+<div class="hero"><div class="wrap">
+<div><span class="pill"><i></i>Booking site starts for Q1 2027</span>
+<h1>Careful building, handed over <em>on schedule.</em></h1>
+<p class="lead">Joma Construction Engineering Ltd delivers commercial, residential and civil projects across Abuja, led by a named site manager and reported on weekly, so you always know where the build stands.</p>
+<div class="cta"><a class="btn pri" href="#contact">Request a quote</a><button class="btn" onclick="openP()">Open client dashboard</button></div></div>
+<div class="draw"><svg viewBox="0 0 460 400" role="img" aria-label="Line drawing of a six-storey building with its top two floors still under construction">
+<g class="dl" stroke-linecap="round" stroke-linejoin="round">
+<path class="dr" pathLength="1" d="M20 350H440"/>
+<path class="dr" pathLength="1" d="M150 350V74M290 350V74M150 304H290M150 258H290M150 212H290M150 166H290"/>
+<path class="dr" pathLength="1" d="M220 350V166M150 120H290" stroke-dasharray="4 5" style="animation:none;stroke-dasharray:4 5;stroke-dashoffset:0;opacity:.45"/>
+<g stroke="#9fb4c6" stroke-width="1.2"><path d="M168 322v10M186 322v10M204 322v10M236 322v10M254 322v10M272 322v10M168 276v10M186 276v10M204 276v10M236 276v10M254 276v10M272 276v10M168 230v10M186 230v10M204 230v10M236 230v10M254 230v10M272 230v10M168 184v10M186 184v10M204 184v10M236 184v10M254 184v10M272 184v10"/></g>
+<rect x="150" y="166" width="140" height="46" fill="#FDEBDD" stroke="none" opacity=".9"/><path class="dr" pathLength="1" d="M150 212H290M150 166H290"/>
+<g class="fadein"><path d="M330 350V28M330 28H420M330 28l-14 18M396 28v36" stroke-width="1.1"/><path d="M345 350V70M330 70h15M330 110h15M330 150h15M330 190h15M330 230h15M330 270h15M330 310h15" stroke-width=".8" opacity=".5"/><rect x="390" y="64" width="12" height="9" fill="#F26B1D" stroke="none"/><path d="M420 28v12" /></g>
+</g>
+<g font-family="DM Mono" font-size="11" fill="#5C6B7A"><path d="M108 350V74M102 350h12M102 304h12M102 258h12M102 212h12M102 166h12M102 120h12" stroke="#5C6B7A" stroke-width="1" fill="none"/>
+<text x="20" y="354">+0.0</text><text x="20" y="308">+3.6</text><text x="20" y="262">+7.2</text><text x="20" y="216">+10.8</text><text x="20" y="170" fill="#F26B1D">+14.4</text><text x="20" y="124">+18.0</text></g>
+<g class="fadein"><rect x="164" y="178" width="112" height="22" rx="11" fill="#fff" stroke="#F26B1D"/><text x="220" y="193" text-anchor="middle" font-family="DM Mono" font-size="11" fill="#D95A10">Level 4 in progress</text></g>
+<g class="fadein" transform="translate(414 316)" stroke="#5C6B7A" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h4l5 15H2zM5 10h8M3.6 14h11"/></g>
+</svg></div></div></div>
+
+<div class="strip"><div class="wrap g">
+<div class="c"><b data-n="64">0</b><span>Projects handed over</span></div><div class="c"><b data-n="12">0</b><span>Years building in Abuja</span></div>
+<div class="c"><b data-n="96" data-s="%">0</b><span>Delivered inside programme</span></div>
+<div class="c"><b data-n="142">0</b><span><svg width="16" height="16" style="color:var(--or)"><use href="#cone"/></svg>Days without a lost-time incident</span></div></div></div>
+
+<section id="services"><div class="wrap"><div class="sh"><div class="dim"><i></i><span>Services</span></div><h2>One contractor from survey to snag list</h2><p>Three disciplines under one roof, so no one has to chase another firm for answers.</p></div>
+<div class="cards">
+<div class="card"><div class="ico"><svg viewBox="0 0 24 24"><path d="M4 21V7l8-4 8 4v14M2 21h20M9 21v-5h6v5M9 10h2M13 10h2M9 13h2M13 13h2"/></svg></div><h3>Building construction</h3><p>Offices, estates, schools and clinics, built to drawings with open-book cost reports every month.</p><ul><li>Commercial and residential</li><li>Structural and finishing works</li></ul></div>
+<div class="card"><div class="ico"><svg viewBox="0 0 24 24"><path d="M3 20c2-7 4.500-11 9-11s7 4 9 11M12 9V4M12 13v2M12 18v2M2 20h20"/></svg></div><h3>Civil and roadworks</h3><p>Access roads, drainage, culverts and earthworks, programmed around the rainy season rather than against it.</p><ul><li>Roads and hardstanding</li><li>Drainage and site preparation</li></ul></div>
+<div class="card"><div class="ico"><svg viewBox="0 0 24 24"><path d="M14.500 5.500l4 4M3 21l4.500-1 11-11a2.100 2.100 0 0 0-3-3l-11 11zM13 8l3 3"/></svg></div><h3>Renovation and fit-out</h3><p>Refurbishment phased around your people, so your team keeps working while we strip, rewire and finish.</p><ul><li>Live-site refurbishment</li><li>Interior fit-out</li></ul></div></div></div></section>
+
+<section class="alt" id="projects"><div class="wrap"><div class="sh"><div class="dim"><i></i><span>Projects</span></div><h2>On site right now</h2><p>Three active builds. Clients see these same figures in their dashboard.</p></div><div class="pj" id="pj"></div></div></section>
+
+<section id="process"><div class="wrap"><div class="sh"><div class="dim"><i></i><span>Process</span></div><h2>Four stages, one site manager</h2><p>Every job follows the same route, whatever its size.</p></div>
+<div class="steps">
+<div class="step"><div class="n">1</div><h3>Survey and quote</h3><p>A site visit, soil and boundary checks, then a fixed-scope price within five working days.</p></div>
+<div class="step"><div class="n">2</div><h3>Plan and permit</h3><p>Programme, approvals and material orders are settled before anyone mobilises.</p></div>
+<div class="step"><div class="n">3</div><h3>Build</h3><p>Daily site logs, weekly photo reports and a safety briefing at the start of every shift.</p></div>
+<div class="step"><div class="n">4</div><h3>Handover</h3><p>A joint snag walk, as-built drawings and a twelve-month defects window.</p></div></div></div></section>
+
+<section class="alt" id="departments"><div class="wrap"><div class="sh"><div class="dim"><i></i><span>Departments</span></div><h2>Twelve departments, built around the site</h2><p>Design and technical teams are backed by the functions that keep a project moving.</p></div>
+<div class="dep"><div class="card"><h4>Engineering and design</h4><ul><li><span>01</span><div>Structural Engineering<small>Designs safe frameworks, foundations and load-bearing elements.</small></div></li><li><span>02</span><div>Civil / Infrastructure<small>Plans roads, earthworks, drainage and site preparation.</small></div></li><li><span>03</span><div>MEP (Mechanical, Electrical, Plumbing)<small>Integrates building utility systems.</small></div></li><li><span>04</span><div>Architectural / Drafting<small>Creates blueprints and 3D CAD/BIM models.</small></div></li></ul></div><div class="card"><h4>Project management and execution</h4><ul><li><span>05</span><div>Project Management<small>Oversees total project delivery, schedule and client relations.</small></div></li><li><span>06</span><div>Planning and Scheduling<small>Tracks timelines, milestones and daily progress.</small></div></li><li><span>07</span><div>Site Operations / Execution<small>Manages on-site labour, equipment and field work.</small></div></li><li><span>08</span><div>Quantity Surveying / Estimating<small>Handles project budgets, costing and billing.</small></div></li></ul></div><div class="card"><h4>Quality, safety and support</h4><ul><li><span>09</span><div>HSE (Health, Safety and Environment)<small>Enforces worker safety rules and site compliance.</small></div></li><li><span>10</span><div>QA / QC<small>Tests materials and inspects work standards.</small></div></li><li><span>11</span><div>Procurement and Logistics<small>Buys materials and manages heavy equipment.</small></div></li><li><span>12</span><div>Contract and Legal<small>Reviews agreements and sub-contractors.</small></div></li></ul></div></div></div></section>
+
+<section id="safety"><div class="wrap"><div class="safe"><div class="a"><div class="ico" style="background:#ffffff14"><svg viewBox="0 0 32 32" style="stroke:#fff"><use href="#hat"/></svg></div><h2>Everyone goes home the way they arrived</h2><p>Helmets, vests and boots are the minimum. We open every shift with a toolbox talk, record near-misses without blame, and stop work whenever a risk is unclear.</p></div>
+<div class="b"><span><svg><use href="#cone"/></svg>Current site record</span><div><b data-n="142">0</b><p style="color:var(--mute);margin-top:10px">days without a lost-time incident across all active sites</p></div></div></div>
+<div class="quote">&ldquo;They flagged a drainage problem in the first week and fixed it before it cost us a month. Handover came two days early.&rdquo;<small>Operations Director, logistics client</small></div></div></section>
+
+<section class="faq" id="faq" style="padding-top:0"><div class="wrap" style="max-width:860px"><div class="sh"><div class="dim"><i></i><span>FAQ</span></div><h2>Before you get in touch</h2></div>
+<details><summary>How quickly can I get a quote?</summary><p>After a site visit, a fixed-scope quote usually takes five working days. Larger civil jobs may need a soil report first, and we will say so at the start.</p></details>
+<details><summary>Can you build to my own architect's drawings?</summary><p>Yes. We build to your design team's drawings, or bring in our design partners if you have not appointed anyone yet.</p></details>
+<details><summary>How do I follow progress?</summary><p>Your dashboard shows percent complete, weekly photos, site documents and upcoming milestones for every active project.</p></details>
+<details><summary>What happens after handover?</summary><p>Every project carries a twelve-month defects window. Report an issue in the dashboard and a site manager responds within two working days.</p></details></div></section>
+
+<section id="contact" style="padding-top:0"><div class="wrap"><div class="final"><div><h2>Have a plot, a plan or a problem site?</h2><p>Tell us where it is and what you need built. A site manager will reply within one working day.</p></div>
+<div class="cta" style="margin:0"><button class="btn pri" onclick="openP('book')">Request a quote</button><a class="btn" href="mailto:projects@jomaconstruction.com">projects@jomaconstruction.com</a></div></div></div></section></main>
+
+<footer><div class="wrap"><div class="fg"><div><a class="logo" href="#top" style="color:var(--ink)"><img src="joma.jpeg" alt="Joma Construction Engineering logo" class="lg">Joma Construction Engineering Ltd</a><p style="margin-top:14px;max-width:340px">Building and civil contractor based in Abuja, Nigeria. Design prototype; content is illustrative pending sign-off.</p></div>
+<div><h5>Company</h5><a href="#services">Services</a><a href="#projects">Projects</a><a href="#departments">Departments</a><a href="#safety">Safety</a></div><div><h5>Contact</h5><a href="mailto:projects@jomaconstruction.com">projects@jomaconstruction.com</a><a href="tel:+2340000000000">+234 000 000 0000</a><a>Abuja, Nigeria</a></div></div>
+<p style="padding-top:24px;font-size:14px">&copy; 2026 Joma Construction Engineering Ltd. All rights reserved.</p></div></footer>
+
+<div id="portal" role="dialog" aria-label="Client dashboard">
+<div id="auth"><div class="bx"><a class="logo" style="color:#fff"><img src="joma.jpeg" alt="Joma Construction Engineering logo" class="lg">Joma Client Portal</a>
+<div class="tabs"><button class="a" id="tS">Sign in</button><button id="tC">Create account</button></div>
+<div class="fm"><div id="nmF" style="display:none"><label>Full name</label><input placeholder="Ibrahim Danladi"></div><label>Email address</label><input type="email" placeholder="you@company.com"><label>Password</label><input type="password" placeholder="••••••••">
+<br><br><button class="btn pri" style="width:100%;justify-content:center" id="go">Sign in</button><div style="display:flex;justify-content:space-between"><button class="link" id="gst">Continue as guest</button><button class="link" onclick="closeP()">Back to website</button></div></div></div></div>
+<div id="app"><aside class="sb"><a class="logo"><img src="joma.jpeg" alt="Joma Construction Engineering logo" class="lg">Joma</a>
+<button class="a" data-v="ov">Overview</button><button data-v="pj">My projects <em>3</em></button><button data-v="book">Book a site visit</button><button data-v="dc">Documents <em>4</em></button><button data-v="pf">Profile</button>
+<div class="usr"><div class="av"><svg style="color:#dfe7ee"><use href="#hat"/></svg></div><div><b style="color:#fff">Ibrahim Danladi</b><br><span style="color:#8ea0b2">Danladi Estates Ltd</span></div></div></aside>
+<div class="main">
+<div class="view on" id="v-ov"><div class="top"><div><h1>Welcome back, Ibrahim.</h1><p class="sub">Here is where your sites stand today.</p></div><button class="x" onclick="closeP()">Back to website</button></div>
+<div class="kp"><div class="k"><b>3</b><span>Active projects</span></div><div class="k"><b>4</b><span>Documents shared</span></div><div class="k"><b>1</b><span>Approval waiting on you</span></div><div class="k"><b>0</b><span>Incidents this month</span></div></div>
+<div class="two"><div class="pn"><h3>Progress by project</h3><p class="sub">Percent complete against programme</p><div id="ovp"></div></div>
+<div><div class="pn"><h3>Next site visit</h3><p class="sub">Confirmed</p><div class="cal"><div class="d">14<small>Oct</small></div><div><b style="color:#fff">Foundation inspection</b><br><span style="color:#8ea0b2">Maitama Villas, 10:00 AM</span></div></div></div>
+<div class="pn"><h3>Recent activity</h3><ul class="act" style="margin-top:12px"><li class="d">Valuation 3 certificate shared<small>Today</small></li><li>Week 31 photo report added<small>Yesterday</small></li><li>Slab pour completed, Level 4<small>3 days ago</small></li></ul></div></div></div></div>
+<div class="view" id="v-pj"><div class="top"><div><h1>My projects</h1><p class="sub">Phase, progress and the next thing that needs you.</p></div></div><div class="pn"><table><tr><th>Project</th><th>Phase</th><th>Complete</th><th>Status</th></tr>
+<tr><td>Wuse Office Block</td><td>Structure</td><td class="mono">72%</td><td><span class="tag g">On programme</span></td></tr><tr><td>Maitama Villas</td><td>Foundations</td><td class="mono">38%</td><td><span class="tag b">Awaiting your sign-off</span></td></tr><tr><td>Gwarinpa Estate Roads</td><td>Earthworks</td><td class="mono">55%</td><td><span class="tag o">Rain delay, 4 days</span></td></tr></table></div></div>
+<div class="view" id="v-book"><h1>Book a site visit</h1><p class="sub">Tell us what you need and a site manager will confirm a time.</p><div class="two"><div class="pn fm"><label>Type of work</label><select><option>Building construction</option><option>Civil and roadworks</option><option>Renovation and fit-out</option></select>
+<div class="r2"><div><label>Preferred date</label><input type="date"></div><div><label>Site location</label><input placeholder="e.g. Jabi, Abuja"></div></div><label>Describe the job</label><textarea rows="4"></textarea><br><br><button class="btn pri" onclick="toast('Request sent. A site manager will confirm within one working day.');show('ov')">Send request</button></div>
+<div class="pn"><h3>What happens next</h3><ul class="act" style="margin-top:14px"><li class="d">Within one working day, a site manager reviews your request</li><li>You receive a confirmed time and calendar invite</li><li>Notes and requested documents appear under My projects</li></ul></div></div></div>
+<div class="view" id="v-dc"><h1>Documents</h1><p class="sub">Upload files for a project, or download items shared with you.</p><div class="drop" id="drop"><b>Drag files here, or click to browse</b>PDF, DOCX, XLSX, JPG up to 25MB</div>
+<div class="pn" style="margin-top:16px"><table id="dt"><tr><td>Valuation 3 certificate.pdf</td><td>Wuse Office Block</td><td><span class="tag">Shared</span></td></tr><tr><td>Soil report.pdf</td><td>Maitama Villas</td><td><span class="tag">Shared</span></td></tr><tr><td>Week 31 photo report.pdf</td><td>Gwarinpa Estate Roads</td><td><span class="tag">Shared</span></td></tr><tr><td>Drainage layout rev C.pdf</td><td>Gwarinpa Estate Roads</td><td><span class="tag">Shared</span></td></tr></table></div></div>
+<div class="view" id="v-pf"><h1>Profile</h1><p class="sub">Keep your details current so nothing is missed.</p><div class="pn fm" style="max-width:620px"><label>Full name</label><input value="Ibrahim Danladi"><label>Company</label><input value="Danladi Estates Ltd"><label>Phone number</label><input value="+234 000 000 0000"><br><br><button class="btn pri" onclick="toast('Profile saved.')">Save changes</button></div></div>
+</div></div></div>
+<div id="toast"></div>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const P=[["Wuse Office Block","Six-storey commercial building",72,6],["Maitama Villas","Four detached residences",38,3],["Gwarinpa Estate Roads","3.2 km access road and drainage",55,0]];
+$('#pj').innerHTML=P.map(p=>{let f='';if(p[3]){for(let k=0;k<p[3];k++)f+=`<rect x="90" y="${150-k*20}" width="120" height="20" ${k==p[3]-1?'fill="#FDEBDD"':''}/>`}else f='<path d="M20 148c60-20 100 12 160-4s80-14 100-8M20 162c60-20 100 12 160-4s80-14 100-8" stroke-dasharray="5 5"/>';
+return `<div class="pc"><div class="th"><svg viewBox="0 0 300 190" preserveAspectRatio="xMidYMid slice"><g fill="#fff" stroke="#14202B" stroke-width="1.3">${f}</g><path d="M10 170h280" stroke="#14202B" stroke-width="1.3"/></svg></div><div class="t"><h3>${p[0]}</h3><p>${p[1]}</p><div class="bar"><i style="width:${p[2]}%"></i></div><small><span>Complete</span><span>${p[2]}%</span></small></div></div>`}).join('');
+$('#ovp').innerHTML=P.map(p=>`<div class="pr"><div class="row"><span>${p[0]}</span><span>${p[2]}%</span></div><div class="bar"><i style="width:${p[2]}%"></i></div></div>`).join('');
+function show(v){$$('.view').forEach(e=>e.classList.toggle('on',e.id==='v-'+v));$$('.sb button').forEach(b=>b.classList.toggle('a',b.dataset.v===v))}
+$$('.sb button').forEach(b=>b.onclick=()=>show(b.dataset.v));
+function enter(v){$('#auth').style.display='none';$('#app').classList.add('on');show(v||'ov')}
+function openP(v){$('#portal').classList.add('on');document.body.style.overflow='hidden';if(v){enter(v)}}
+function closeP(){$('#portal').classList.remove('on');$('#auth').style.display='';$('#app').classList.remove('on');document.body.style.overflow=''}
+let mode='s';function setM(m){mode=m;$('#tS').classList.toggle('a',m=='s');$('#tC').classList.toggle('a',m=='c');$('#nmF').style.display=m=='c'?'block':'none';$('#go').textContent=m=='s'?'Sign in':'Create account'}
+$('#tS').onclick=()=>setM('s');$('#tC').onclick=()=>setM('c');$('#go').onclick=()=>enter();$('#gst').onclick=()=>enter();
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),3200)}
+const d=$('#drop');d.onclick=()=>{const i=document.createElement('input');i.type='file';i.multiple=true;i.onchange=()=>add(i.files);i.click()};
+d.ondragover=e=>{e.preventDefault();d.classList.add('h')};d.ondragleave=()=>d.classList.remove('h');d.ondrop=e=>{e.preventDefault();d.classList.remove('h');add(e.dataTransfer.files)};
+function add(f){[...f].forEach(x=>{const r=$('#dt').insertRow(0);r.innerHTML='<td></td><td>Uploaded just now</td><td><span class="tag g">Received</span></td>';r.cells[0].textContent=x.name});toast(f.length+' file(s) uploaded.')}
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;io.unobserve(e.target);const el=e.target,n=+el.dataset.n,s=el.dataset.s||'',t0=performance.now();
+(function f(t){const k=Math.min(1,(t-t0)/1400);el.textContent=Math.round(n*(1-Math.pow(1-k,3)))+s;if(k<1)requestAnimationFrame(f)})(t0)}),{threshold:.5});
+$$('[data-n]').forEach(e=>io.observe(e));
+$$('#nl a').forEach(a=>a.onclick=()=>nl.classList.remove('open'));
+</script></body></html>
