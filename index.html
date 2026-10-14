@@ -9,20 +9,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    /* ===== Joma token system — cool mint-white ground, navy ink, growth-green accent ===== */
-    --paper:#F6FAF7;         /* primary background — pale cool mint-white */
-    --paper-deep:#EAF5EE;    /* pastel mint band background */
+    --paper:#F6FAF7;         
+    --paper-deep:#EAF5EE;    
     --white:#FFFFFF;
-    --navy:#0E1B2E;          /* primary ink / headings — shared family with MJC, cooler cast */
+    --navy:#0E1B2E;          
     --navy-1:#152840;
-    --green:#1E8A4C;         /* primary accent */
+    --green:#1E8A4C;         
     --green-deep:#166B3B;
     --green-bright:#38B871;
-    --mint-pale:#DFF3E6;     /* pastel tint for badges/backgrounds */
+    --mint-pale:#DFF3E6;     
     --ink:#1B2A22;
     --ink-soft:#57695F;
     --ink-faint:#8CA096;
-    --line:#DCEAE0;          /* cool hairline */
+    --line:#DCEAE0;          
     --line-soft:#E9F3ED;
     --shadow:0 24px 60px -32px rgba(14,27,46,.18);
     --radius-lg:24px;
@@ -101,7 +100,6 @@
   .hero-micro span{display:flex;align-items:center;gap:8px;}
   .hero-micro span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--green);}
 
-  /* Bracket card (progressive tax bracket viz) */
   .bracket-card{background:var(--white);border-radius:var(--radius-md);padding:32px 30px 26px;box-shadow:var(--shadow);border:1px solid var(--line);position:relative;}
   .bc-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;}
   .bc-head .t{color:var(--navy);font-size:13px;font-weight:700;}
@@ -137,7 +135,20 @@
   .trust-item .lbl{font-size:11.5px;color:var(--ink-soft);margin-top:8px;line-height:1.5;max-width:170px;margin-left:auto;margin-right:auto;}
   @media(max-width:800px){.trust-strip{grid-template-columns:repeat(2,1fr);} .trust-item:nth-child(2){border-right:none;}}
 
-  /* ===== Pillars (bento) ===== */
+  /* ===== Trust carousel (dual-direction marquee, as on chatfeatured.com) =====[cite: 3] */
+  .trust-car{--tc-ink:var(--navy);--tc-accent:var(--green-deep);--tc-speed:48s;padding:8px 0 0;text-align:center;}
+  .trust-car .tc-label{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--tc-accent);margin-bottom:28px;}
+  .tc-row{overflow:hidden;position:relative;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);}
+  .tc-row+.tc-row{margin-top:22px;}
+  .tc-track{display:flex;width:max-content;animation:tc-left var(--tc-speed) linear infinite;will-change:transform;}
+  .tc-row.rev .tc-track{animation-name:tc-right;}
+  .tc-logo{display:flex;align-items:center;gap:11px;padding-right:64px;flex:none;color:var(--tc-ink);opacity:.62;filter:grayscale(1);font-weight:700;font-size:18px;letter-spacing:-.01em;white-space:nowrap;}
+  .tc-logo svg{width:30px;height:30px;flex:none;}
+  @keyframes tc-left{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @keyframes tc-right{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+  @media (prefers-reduced-motion:reduce){.tc-track{animation:none}}
+
+  /* ===== Pillars ===== */
   .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
   @media(max-width:860px){.pillars{grid-template-columns:1fr;}}
   .pillar{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-md);padding:34px 30px;transition:transform .25s, box-shadow .25s;}
@@ -165,7 +176,7 @@
   .flow-arrow{color:var(--green-deep);font-size:18px;padding:0 12px;flex-shrink:0;}
   @media(max-width:760px){.flow{flex-direction:column;align-items:stretch;} .flow-arrow{transform:rotate(90deg);align-self:center;padding:8px 0;}}
 
-  /* ===== Testimonial (full green-tinted bleed) ===== */
+  /* ===== Testimonial ===== */
   .quote-band{background:var(--navy);position:relative;overflow:hidden;padding:92px 0;}
   .quote-band::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 20% 30%, rgba(30,138,76,0.14), transparent 55%);}
   .band-inner{display:flex;gap:48px;align-items:center;justify-content:space-between;flex-wrap:wrap;position:relative;z-index:1;}
@@ -356,40 +367,27 @@
   #p-toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#fff;color:var(--navy);padding:13px 22px;border-radius:100px;font-size:13.5px;font-weight:600;opacity:0;transition:all .25s;z-index:300;display:flex;align-items:center;gap:10px;box-shadow:0 20px 40px -10px rgba(0,0,0,.5);pointer-events:none;}
   #p-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
-/* ===== Trust carousel (dual-direction marquee, as on chatfeatured.com) ===== */
-.trust-car{--tc-ink:var(--navy);--tc-accent:var(--gold);--tc-speed:48s;padding:8px 0 0;text-align:center}
-.trust-car .tc-label{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--tc-accent);margin-bottom:28px}
-.tc-row{overflow:hidden;position:relative;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
-.tc-row+.tc-row{margin-top:22px}
-.tc-track{display:flex;width:max-content;animation:tc-left var(--tc-speed) linear infinite;will-change:transform}
-.tc-row.rev .tc-track{animation-name:tc-right}
-.tc-logo{display:flex;align-items:center;gap:11px;padding-right:64px;flex:none;color:var(--tc-ink);opacity:.62;filter:grayscale(1);font-weight:700;font-size:18px;letter-spacing:-.01em;white-space:nowrap}
-.tc-logo svg{width:30px;height:30px;flex:none}
-@keyframes tc-left{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@keyframes tc-right{from{transform:translateX(-50%)}to{transform:translateX(0)}}
-@media (prefers-reduced-motion:reduce){.tc-track{animation:none}}
-/* ===== Joma client dashboard: light theme override ===== */
-#portal{background:var(--paper);color:var(--ink)}
-.p-topbar{background:rgba(255,255,255,.92);border-bottom:1px solid var(--line)}.p-topbar .p-brand{color:var(--navy)}.portal-logo-img{border-color:var(--line)}.p-topbar .p-brand .name small{color:var(--green-deep)}
-.p-link-back{color:var(--ink-soft)}.p-link-back:hover{color:var(--green-deep)}.p-user{border-left-color:var(--line)}.p-user .u-name{color:var(--navy)}.p-user .u-sub{color:var(--ink-soft)}
-.p-signout{border-color:var(--line);color:var(--ink-soft)}.p-signout:hover{border-color:var(--green);color:var(--navy)}
-.p-sidebar{background:var(--white);border-right-color:var(--line)}.p-sidebar .grp{color:var(--ink-faint)}.p-nav-item{color:var(--ink-soft)}.p-nav-item:hover{background:var(--mint-pale);color:var(--navy)}
-.p-nav-item .cnt{background:var(--paper-deep);color:var(--ink-soft)}.p-nav-item.active{background:var(--mint-pale);color:var(--green-deep);border-color:rgba(30,138,76,.35)}.p-nav-item.active .cnt{background:var(--green);color:#fff}
-@media(max-width:900px){.p-sidebar{border-bottom-color:var(--line)}}
-.p-page-head h1,.p-stat-card .val,.p-card h3,.p-activity-row .txt b,.p-consult-date .info .t,.p-table .svc-name,.p-doc-row .n,.p-toggle-row .t,.p-dropzone h4{color:var(--navy)}
-.p-page-head .sub,.p-card .p-card-sub,.p-stat-card .lbl,.p-consult-date .info .s,.p-doc-row .m,.p-table .svc-sub,.p-toggle-row .s,.p-dropzone p{color:var(--ink-soft)}
-.p-glass{background:var(--white);border-color:var(--line);box-shadow:0 2px 8px -2px rgba(14,27,46,.06)}.p-glass-green{border-color:rgba(30,138,76,.35)}.p-stat-card .val small{color:var(--green-deep)}
-.p-activity-row,.p-table th,.p-table td,.p-doc-row,.p-toggle-row{border-color:var(--line-soft)}.p-activity-row .txt{color:var(--ink)}.p-activity-row .time,.p-table th{color:var(--ink-faint)}.p-activity-dot{background:var(--green)}
-.p-consult-date .d{background:var(--mint-pale);color:var(--green-deep);border-color:rgba(30,138,76,.35)}
-.p-form .field label{color:var(--ink-soft)}.p-form .field input,.p-form .field select,.p-form .field textarea{background:var(--paper);border-color:var(--line);color:var(--navy)}
-.p-chip-opt{border-color:var(--line);color:var(--ink-soft)}.p-chip-opt.sel{border-color:var(--green);background:var(--mint-pale);color:var(--green-deep)}
-.p-chip.submitted{background:var(--mint-pale);color:var(--green-deep)}.p-chip.submitted::before{background:var(--green)}.p-chip.scheduled{background:#E6EFF7;color:#2662C9}.p-chip.scheduled::before{background:#2662C9}
-.p-chip.progress{background:#FBF1DC;color:#B7791F}.p-chip.progress::before{background:#B7791F}.p-chip.done{background:#E4F5EA;color:var(--green-deep)}.p-chip.done::before{background:var(--green)}
-.p-dropzone{border-color:var(--line)}.p-dropzone.drag{background:var(--mint-pale)}.p-doc-ic{background:var(--mint-pale);color:var(--green-deep)}.p-icon-btn{border-color:var(--line);color:var(--ink-soft)}.p-icon-btn:hover{color:var(--green-deep)}
-.switch .track{background:var(--line)}#p-toast{background:var(--navy);color:#fff}
-#portal .btn-ghost{border-color:var(--navy)!important;color:var(--navy)!important}#portal .btn-ghost:hover{background:var(--navy);color:#fff!important}
-#portal [style*="#8FA098"]{color:var(--ink-soft)!important}
-.trust-car{--tc-accent:var(--green-deep)}
+  /* Joma client dashboard: light theme override */
+  #portal{background:var(--paper);color:var(--ink)}
+  .p-topbar{background:rgba(255,255,255,.92);border-bottom:1px solid var(--line)}.p-topbar .p-brand{color:var(--navy)}.portal-logo-img{border-color:var(--line)}.p-topbar .p-brand .name small{color:var(--green-deep)}
+  .p-link-back{color:var(--ink-soft)}.p-link-back:hover{color:var(--green-deep)}.p-user{border-left-color:var(--line)}.p-user .u-name{color:var(--navy)}.p-user .u-sub{color:var(--ink-soft)}
+  .p-signout{border-color:var(--line);color:var(--ink-soft)}.p-signout:hover{border-color:var(--green);color:var(--navy)}
+  .p-sidebar{background:var(--white);border-right-color:var(--line)}.p-sidebar .grp{color:var(--ink-faint)}.p-nav-item{color:var(--ink-soft)}.p-nav-item:hover{background:var(--mint-pale);color:var(--navy)}
+  .p-nav-item .cnt{background:var(--paper-deep);color:var(--ink-soft)}.p-nav-item.active{background:var(--mint-pale);color:var(--green-deep);border-color:rgba(30,138,76,.35)}.p-nav-item.active .cnt{background:var(--green);color:#fff}
+  @media(max-width:900px){.p-sidebar{border-bottom-color:var(--line)}}
+  .p-page-head h1,.p-stat-card .val,.p-card h3,.p-activity-row .txt b,.p-consult-date .info .t,.p-table .svc-name,.p-doc-row .n,.p-toggle-row .t,.p-dropzone h4{color:var(--navy)}
+  .p-page-head .sub,.p-card .p-card-sub,.p-stat-card .lbl,.p-consult-date .info .s,.p-doc-row .m,.p-table .svc-sub,.p-toggle-row .s,.p-dropzone p{color:var(--ink-soft)}
+  .p-glass{background:var(--white);border-color:var(--line);box-shadow:0 2px 8px -2px rgba(14,27,46,.06)}.p-glass-green{border-color:rgba(30,138,76,.35)}.p-stat-card .val small{color:var(--green-deep)}
+  .p-activity-row,.p-table th,.p-table td,.p-doc-row,.p-toggle-row{border-color:var(--line-soft)}.p-activity-row .txt{color:var(--ink)}.p-activity-row .time,.p-table th{color:var(--ink-faint)}.p-activity-dot{background:var(--green)}
+  .p-consult-date .d{background:var(--mint-pale);color:var(--green-deep);border-color:rgba(30,138,76,.35)}
+  .p-form .field label{color:var(--ink-soft)}.p-form .field input,.p-form .field select,.p-form .field textarea{background:var(--paper);border-color:var(--line);color:var(--navy)}
+  .p-chip-opt{border-color:var(--line);color:var(--ink-soft)}.p-chip-opt.sel{border-color:var(--green);background:var(--mint-pale);color:var(--green-deep)}
+  .p-chip.submitted{background:var(--mint-pale);color:var(--green-deep)}.p-chip.submitted::before{background:var(--green)}.p-chip.scheduled{background:#E6EFF7;color:#2662C9}.p-chip.scheduled::before{background:#2662C9}
+  .p-chip.progress{background:#FBF1DC;color:#B7791F}.p-chip.progress::before{background:#B7791F}.p-chip.done{background:#E4F5EA;color:var(--green-deep)}.p-chip.done::before{background:var(--green)}
+  .p-dropzone{border-color:var(--line)}.p-dropzone.drag{background:var(--mint-pale)}.p-doc-ic{background:var(--mint-pale);color:var(--green-deep)}.p-icon-btn{border-color:var(--line);color:var(--ink-soft)}.p-icon-btn:hover{color:var(--green-deep)}
+  .switch .track{background:var(--line)}#p-toast{background:var(--navy);color:#fff}
+  #portal .btn-ghost{border-color:var(--navy)!important;color:var(--navy)!important}#portal .btn-ghost:hover{background:var(--navy);color:#fff!important}
+  #portal [style*="#8FA098"]{color:var(--ink-soft)!important}
 </style>
 </head>
 <body>
@@ -483,13 +481,15 @@
       <div class="trust-item"><div class="num">FIRS</div><div class="lbl">Registered tax agent status</div></div>
     </div>
   </div>
-<div class="wrap" style="margin-top:72px">
-<div class="trust-car reveal" id="trustCar" aria-label="Organisations we work with">
-  <div class="tc-label">Trusted by leading organisations</div>
-  <div class="tc-row"><div class="tc-track" data-names="Meridian Freight|Coral Foods|Lagos Textiles|Northgate Capital|Savannah Energy|Atlas Logistics|Harmattan Foods|Crestline Bank|Bluewater Marine|Kingsway Estates"></div></div>
-  <div class="tc-row rev"><div class="tc-track" data-names="Orchid Health|Sahel Agro|Ironbridge Steel|Palmgrove Hotels|Quantum Telecoms|Riverstone Mining|Summit Insurance|Tidewater Oil|Unity Microfinance|Vantage Print"></div></div>
-</div>
-</div>
+  
+  <!-- TRUST CAROUSEL INTEGRATION -->
+  <div class="wrap" style="margin-top:72px">
+    <div class="trust-car reveal" id="trustCar" aria-label="Organisations we work with">
+      <div class="tc-label">Trusted by leading organisations</div>
+      <div class="tc-row"><div class="tc-track" data-names="Meridian Freight|Coral Foods|Lagos Textiles|Northgate Capital|Savannah Energy|Atlas Logistics|Harmattan Foods|Crestline Bank|Bluewater Marine|Kingsway Estates"></div></div>
+      <div class="tc-row rev"><div class="tc-track" data-names="Orchid Health|Sahel Agro|Ironbridge Steel|Palmgrove Hotels|Quantum Telecoms|Riverstone Mining|Summit Insurance|Tidewater Oil|Unity Microfinance|Vantage Print"></div></div>
+    </div>
+  </div>
 </section>
 
 <section id="services" class="band-pale">
@@ -646,7 +646,7 @@
 </footer>
 </div>
 
-<!-- ============ PORTAL GATE (sign in / create account) ============ -->
+<!-- ============ PORTAL GATE ============ -->
 <div id="portalGate" onclick="handleGateOverlayClick(event)">
   <div class="gate-card">
     <button class="gate-close" onclick="closeGate()" aria-label="Close portal modal">✕</button>
@@ -680,7 +680,7 @@
   </div>
 </div>
 
-<!-- ============ CLIENT PORTAL (DASHBOARD) ============ -->
+<!-- ============ CLIENT PORTAL WORKSPACE ============ -->
 <div id="portal">
   <div class="p-topbar">
     <button class="p-brand" onclick="exitPortal()">
@@ -893,7 +893,6 @@
     });
   }
 
-  /* ---- count-up numbers in trust strip ---- */
   const counted = new WeakSet();
   const countIo = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{
@@ -915,7 +914,6 @@
   },{threshold:0.35});
   document.querySelectorAll('[data-count]').forEach(el=>countIo.observe(el));
 
-  /* ---- portal gate ---- */
   function openGate(){
     document.body.classList.add('portal-gate-open');
     const gate = document.getElementById('portalGate');
@@ -1144,18 +1142,17 @@
     window._toastTimer = setTimeout(()=>t.classList.remove('show'), 2800);
   }
 
-/* Trust carousel: builds each row, then duplicates it so the -50% loop is seamless. Replace the placeholder names/SVGs with real client logos (<img>) later. */
-(function(){
-  var shapes=['<circle cx="15" cy="15" r="13" fill="currentColor"/>','<rect x="3" y="3" width="24" height="24" rx="5" fill="currentColor"/>','<path d="M15 2l12 7v12l-12 7L3 21V9z" fill="currentColor"/>','<path d="M15 2l13 13-13 13L2 15z" fill="currentColor"/>','<path d="M3 26L15 4l12 22z" fill="currentColor"/>'];
-  document.querySelectorAll('#trustCar .tc-track').forEach(function(t){
-    var set=t.dataset.names.split('|').map(function(n,i){
-      var m=n.charAt(0);
-      return '<div class="tc-logo"><svg viewBox="0 0 30 30" aria-hidden="true">'+shapes[i%shapes.length]+'<text x="15" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="#fff" font-family="sans-serif">'+m+'</text></svg><span>'+n+'</span></div>';
-    }).join('');
-    t.innerHTML=set+set;
-  });
-})();
-
+  /* Trust carousel script */
+  (function(){
+    var shapes=['<circle cx="15" cy="15" r="13" fill="currentColor"/>','<rect x="3" y="3" width="24" height="24" rx="5" fill="currentColor"/>','<path d="M15 2l12 7v12l-12 7L3 21V9z" fill="currentColor"/>','<path d="M15 2l13 13-13 13L2 15z" fill="currentColor"/>','<path d="M3 26L15 4l12 22z" fill="currentColor"/>'];
+    document.querySelectorAll('#trustCar .tc-track').forEach(function(t){
+      var set=t.dataset.names.split('|').map(function(n,i){
+        var m=n.charAt(0);
+        return '<div class="tc-logo"><svg viewBox="0 0 30 30" aria-hidden="true">'+shapes[i%shapes.length]+'<text x="15" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="#fff" font-family="sans-serif">'+m+'</text></svg><span>'+n+'</span></div>';
+      }).join('');
+      t.innerHTML=set+set;
+    });
+  })();
 </script>
 </body>
 </html>
